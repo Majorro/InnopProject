@@ -25,8 +25,3 @@ AccountsDB = AccountModel(my_db)
 GroupsDB = GroupModel(my_db)
 UsersDB = UserModel(my_db)
 PostsDB = PostModel(my_db)
-
-
-post = PostsDB.get_by_id(3)
-print(post)
-post['parameters']
