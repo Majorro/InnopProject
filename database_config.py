@@ -15,9 +15,13 @@ class DB:
 
 
 from DatabaseModels.AccountModel import AccountModel
+from DatabaseModels.GroupModel import GroupModel
+
 
 my_db = DB('db.db')
 AccountsDB = AccountModel(my_db)
+GroupsDB = GroupModel(my_db)
+
 
 
 

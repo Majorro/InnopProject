@@ -72,10 +72,10 @@ class AccountModel:
             account['email'],
             account['age'],
             account['person_description'],
-            account['admin_groups'],
-            account['user_groups'],
-            account['invitations'],
-            account['urls'],
+            json.dumps(account['admin_groups']),
+            json.dumps(account['user_groups']),
+            json.dumps(account['invitations']),
+            json.dumps(account['urls']),
             account['image']))
 
         cursor.execute('''SELECT last_insert_rowid()''')
@@ -123,16 +123,23 @@ class AccountModel:
             account['email'],
             account['age'],
             account['person_description'],
-            account['admin_groups'],
-            account['user_groups'],
-            account['invitations'],
-            account['urls'],
+            json.dumps(account['admin_groups']),
+            json.dumps(account['user_groups']),
+            json.dumps(account['invitations']),
+            json.dumps(account['urls']),
             account['image']),
             (account['account_id'],))
 
         cursor.close()
         self.connection.commit()
         return
+
+    def delete_account(self, id):
+        cursor = self.connection.cursor()
+        cursor.execute('''DELETE FROM accounts WHERE account_id = ?''', (str(id),))
+        cursor.close()
+        self.connection.commit()
+
 
 
 #Test account
@@ -148,10 +155,10 @@ account['last_name'] = "Пупкин"
 account['email'] = "vasya@mail.ru"
 account['age'] = 17
 account['person_description'] = "тестовое описание человека"
-account['admin_groups'] = json.dumps([1, 2 , 3])
-account['user_groups'] = json.dumps([1])
-account['invitations'] = json.dumps([5, 7])
-account['urls'] = json.dumps({"vk" : "https://vk.com/id1"})
+account['admin_groups'] = [1, 2, 3]
+account['user_groups'] = [1]
+account['invitations'] = [5, 7]
+account['urls'] = {"vk" : "https://vk.com/id1"}
 # картинку передавать в байтовом представлении !!!
 account['image'] = bytes_to_base64 (b"sadsad123212312sadsdadad321123")
 id = AccountsDB.insert(account)
