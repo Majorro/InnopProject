@@ -1,12 +1,49 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-     <img src="data:image/jpg;base64,{{IMAGE}}"/>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Psychology</title>
+        <link href="../static/styles/style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/6a4be30845.js"></script>
+    </head>
+    <body>
+        <!-- top_bar -->
+        <div id="top_bar" class="colored">
+            <button class="top_bar_button">Main page</button>
+            <button class="top_bar_button">Invitations</button>
+            <button class="top_bar_button">Groups</button>
+            <button class="top_bar_button">Админ page</button>
+        </div>
+        <!-- end -->
 
-</body>
+        <!-- main_view -->
+        <div id="main_view">
+            <div id="left_panel">
+                <div id="avatar" class="element"><img id="img_avatar" src="http://via.placeholder.com/500x100" alt="Avatar"></div>
+                <div id="info" class="element colored downer">
+
+                </div>
+            </div>
+            
+            <div id="right_panel">
+                <div id="references" class="element colored">
+                    <i class="fab fa-telegram-plane"></i>
+                    <i class="fab fa-vk"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-reddit-alien"></i>
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div id="about_me" class="element colored">
+
+                </div>
+                <div id="evaluation" class="element colored downer">
+
+                </div>
+            </div>
+        </div>
+        <!-- end -->
+        <script src="../static/scripts/main.js" ></script>
+    </body>
 </html>
-
