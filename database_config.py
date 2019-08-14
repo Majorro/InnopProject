@@ -14,13 +14,10 @@ class DB:
         self.connection.close()
 
 
-from DatabaseModels/AccountModel import AccountModel
+from DatabaseModels.AccountModel import AccountModel
 
 my_db = DB('db.db')
 AccountsDB = AccountModel(my_db)
-
-
-
 
 
 

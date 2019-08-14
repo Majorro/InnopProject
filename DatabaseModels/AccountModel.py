@@ -1,3 +1,4 @@
+import json
 def accountdata_to_json(row):
     if row is None:
         return None
@@ -16,8 +17,6 @@ def accountdata_to_json(row):
     account['admin_groups'] = json.loads(admin_groups)
     account['user_groups'] = json.loads(user_groups)
     account['invitations'] = json.loads(invitations)
-    print(urls)
-
     account['urls'] = urls
     account['image'] = image
     return account
