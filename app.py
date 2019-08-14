@@ -9,6 +9,12 @@ app = Flask(__name__)
 from backend_requests import *
 
 
-app.config['SECRET_KEY'] = 'e70lIUUoXRKlXc5VUBmiJ9Hdi'
+
+
+
+
+#random secret key
+app.config['SECRET_KEY'] = 'InnopolisProjectSchool2019'
+
 if __name__ =='__main__':
     app.run(port=8080, host='127.0.0.1')
