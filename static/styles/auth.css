@@ -1,0 +1,10 @@
+#body
+{
+    display: flex;
+    flex-direction: column;
+}
+
+#logo
+{
+    margin: 15vh 0 0 56vh;
+}

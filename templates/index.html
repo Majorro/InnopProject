@@ -8,12 +8,17 @@
         <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/6a4be30845.js"></script>
     </head>
+    
     <body>
+        <!-- background_image -->
+        <div class="bg_image"></div>
+        <!-- background_image end -->
+        
         <!-- top_bar -->
-        <div id="top_bar" class="colored">
-            <button class="top_bar_button">Main page</button>
-            <button class="top_bar_button">Invitations</button>
-            <button class="top_bar_button">Groups</button>
+        <div id="top_bar">
+            <button id="main_page_button" class="top_bar_button">Главная</button>
+            <button class="top_bar_button">Приглашения</button>
+            <button class="top_bar_button">Группы</button>
             <button class="top_bar_button">Админ page</button>
         </div>
         <!-- end -->
@@ -21,25 +26,27 @@
         <!-- main_view -->
         <div id="main_view">
             <div id="left_panel">
-                <div id="avatar" class="element"><img id="img_avatar" src="http://via.placeholder.com/500x100" alt="Avatar"></div>
-                <div id="info" class="element colored downer">
-
+                <div id="avatar">
+                    <!-- <img id="avatar_img" src="../static/images/more_fashion_avatar.jpg" alt="Avatar"> -->
                 </div>
             </div>
             
             <div id="right_panel">
-                <div id="references" class="element colored">
-                    <i class="fab fa-telegram-plane"></i>
+                <div id="user_info">
+                    <i class="fas fa-mars"></i> Majorro <br>
+                    Диджей Андрей Балконский<br>
+                    Россия, ИннОполис<br>
+                    Дата рождения : 228 год до н.э.<br>
+                </div>
+                <p id="about_me">
+                    Ааоаооаа ооаоаоаоаоао аоаоаоаоаоаооао  аоаоаоаоаоаоа ммммммммммм мммммммммм ммммммммммм мммммммммм мммммммммммм
+                </p>
+                <div id="references">
+                    <div class="icons"><i class="fab fa-telegram-plane"></i></div>
                     <i class="fab fa-vk"></i>
                     <i class="fab fa-instagram"></i>
                     <i class="fab fa-reddit-alien"></i>
                     <i class="fas fa-bolt"></i>
-                </div>
-                <div id="about_me" class="element colored">
-
-                </div>
-                <div id="evaluation" class="element colored downer">
-
                 </div>
             </div>
         </div>
