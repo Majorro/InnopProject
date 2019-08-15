@@ -3,7 +3,7 @@ def accountdata_to_json(row):
     if row is None:
         return None
 
-    account_id, login, password, first_name, last_name, email, age, person_description, admin_groups, user_groups, invitations, urls, image = row
+    account_id, login, password, first_name, last_name, email, date, person_description, admin_groups, user_groups, invitations, urls, image, sex = row
 
     account = dict()
     account['account_id'] = account_id
@@ -12,13 +12,14 @@ def accountdata_to_json(row):
     account['first_name'] = first_name
     account['last_name'] = last_name
     account['email'] = email
-    account['age'] = age
+    account['date'] = date
     account['person_description'] = person_description
     account['admin_groups'] = json.loads(admin_groups)
     account['user_groups'] = json.loads(user_groups)
     account['invitations'] = json.loads(invitations)
     account['urls'] = urls
     account['image'] = image
+    account['sex'] = sex
     return account
 
 
@@ -36,13 +37,14 @@ class AccountModel:
                             first_name TEXT,
                             last_name TEXT,
                             email TEXT,
-                            age INTEGER,
+                            date TEXT,
                             person_description TEXT,
                             admin_groups BLOB,
                             user_groups BLOB,
                             invitations BLOB,
                             urls BLOB,
-                            image BLOB
+                            image BLOB,
+                            sex TEXT
                             )''')
 
         cursor.close()
@@ -56,27 +58,29 @@ class AccountModel:
                                                 first_name,
                                                 last_name,
                                                 email,
-                                                age,
+                                                date,
                                                 person_description,
                                                 admin_groups,
                                                 user_groups,
                                                 invitations,
                                                 urls,
-                                                image) 
+                                                image, 
+                                                sex) 
 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''', (
             account['login'],
             account['password'],
             account['first_name'],
             account['last_name'],
             account['email'],
-            account['age'],
+            account['date'],
             account['person_description'],
             json.dumps(account['admin_groups']),
             json.dumps(account['user_groups']),
             json.dumps(account['invitations']),
             json.dumps(account['urls']),
-            account['image']))
+            account['image'],
+            account['sex']))
 
         cursor.execute('''SELECT last_insert_rowid()''')
         id = cursor.fetchone()[0]
@@ -109,25 +113,27 @@ class AccountModel:
                                         first_name='{}',
                                         last_name='{}',
                                         email='{}',
-                                        age='{}',
+                                        date='{}',
                                         person_description='{}',
                                         admin_groups='{}',
                                         user_groups='{}',
                                         invitations='{}',
                                         urls='{}',
-                                        image='{}' WHERE account_id = ? '''.format(
+                                        image='{}', 
+                                        sex='{}' WHERE account_id = ? '''.format(
             account['login'],
             account['password'],
             account['first_name'],
             account['last_name'],
             account['email'],
-            account['age'],
+            account['date'],
             account['person_description'],
             json.dumps(account['admin_groups']),
             json.dumps(account['user_groups']),
             json.dumps(account['invitations']),
             json.dumps(account['urls']),
-            account['image']),
+            account['image'],
+            account['sex']),
             (account['account_id'],))
 
         cursor.close()
@@ -153,7 +159,7 @@ account['password'] = "pass123"
 account['first_name'] = "Василий"
 account['last_name'] = "Пупкин"
 account['email'] = "vasya@mail.ru"
-account['age'] = 17
+account['date'] = '12.01.2014'
 account['person_description'] = "тестовое описание человека"
 account['admin_groups'] = [1, 2, 3]
 account['user_groups'] = [1]
@@ -161,6 +167,7 @@ account['invitations'] = [5, 7]
 account['urls'] = {"vk" : "https://vk.com/id1"}
 # картинку передавать в байтовом представлении !!!
 account['image'] = bytes_to_base64 (b"sadsad123212312sadsdadad321123")
+account['sex'] = 'male'
 id = AccountsDB.insert(account)
 print(id)
 '''
@@ -168,12 +175,12 @@ print(id)
 
 # Test get_by_id
 '''
-    account_id, login, password, first_name, last_name, email, age, person_description, admin_groups, user_groups, invitations, urls, image = AccountsDB.get_by_id(2)
+    account = AccountsDB.get_by_id(2)
 '''
 
 # Test get_by_login
 '''
-    account_id, login, password, first_name, last_name, email, age, person_description, admin_groups, user_groups, invitations, urls, image = AccountsDB.get_by_login(12)
+    account = AccountsDB.get_by_login(12)
 '''
 
 
