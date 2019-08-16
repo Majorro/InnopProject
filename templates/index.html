@@ -1,11 +1,56 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <script src="../static/index.js" type="text/javascript"></script>
-    <title>Title</title>
-</head>
-<body>
-<button onclick="send()">Send</button>
-</body>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Главная</title>
+        <link href="../static/styles/style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/6a4be30845.js"></script>
+    </head>
+    
+    <body>
+        <!-- background_image -->
+        <div class="bg_image"></div>
+        <!-- background_image end -->
+        
+        <!-- top_bar -->
+        <div id="top_bar">
+            <button id="main_page_button" class="top_bar_button">Главная</button>
+            <button class="top_bar_button">Приглашения</button>
+            <button class="top_bar_button">Группы</button>
+            <button class="top_bar_button">Админ page</button>
+        </div>
+        <!-- end -->
+
+        <!-- main_view -->
+        <div id="main_view">
+            <div id="left_panel">
+                <div id="avatar">
+                    <!-- <img id="avatar_img" src="../static/images/more_fashion_avatar.jpg" alt="Avatar"> -->
+                </div>
+            </div>
+            
+            <div id="right_panel">
+                <div id="user_info">
+                    Majorro <br>
+                    Диджей Андрей Балконский<br>
+                    Россия, ИннОполис<br>
+                    Дата рождения : 228 год до н.э.
+                </div>
+                <p id="about_me">
+                    Ааоаооаа ооаоаоаоаоао аоаоаоаоаоаооао  аоаоаоаоаоаоа ммммммммммм мммммммммм ммммммммммм мммммммммм мммммммммммм
+                </p>
+                <div id="references">
+                    <i class="fab fa-telegram-plane"></i>
+                    <i class="fab fa-vk"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-reddit-alien"></i>
+                    <i class="fas fa-bolt"></i>
+                </div>
+            </div>
+        </div>
+        <!-- end -->
+        <script src="../static/scripts/main.js" ></script>
+    </body>
 </html>
