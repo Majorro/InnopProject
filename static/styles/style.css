@@ -108,20 +108,63 @@ body
     flex-direction: column;
     flex-basis: 60%;
     justify-content: space-between;
-    margin: 22vh 10vw 15vh 0;
+    margin: 22vh 10vw 20vh 0;
 }
 
 #user_info{}
-
-#about_me
-{
-    margin-top: 2vh;
-    width: 100%;
-}
-
 
 .fa-mars
 {
     font-size: 20px;
 }
+
+#about_me
+{
+    margin-top: 2vh;
+    width: 100%;
+    text-align: justify;
+}
+
+/* fa-telegram-plane, fa-vk, fa-instagram, fa-reddit-alien, fa-bolt
+{
+    font-size: 30px;
+    cursor: pointer;
+}
+
+fa-telegram-plane:hover, fa-vk:hover, fa-instagram:hover, fa-reddit-alien:hover, fa-bolt:hover
+{
+    color: white;
+}
+
+fa-telegram-plane:active, fa-vk:active, fa-instagram:active, fa-reddit-alien:active, fa-bolt:active
+{
+    color: rgb(212, 212, 212);
+    transition: 0s;
+} */
+
+#references
+{
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.fab, .fas
+{
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.fab:hover, .fas:hover
+{
+    color: white;
+}
+
+.fab:active, .fas:active
+{
+    color: rgb(212, 212, 212);
+    transition: 0s;
+}
+
 /* main_view end */
