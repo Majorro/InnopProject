@@ -15,13 +15,13 @@ class DB:
 
 
 from DatabaseModels.AccountModel import AccountModel
+from DatabaseModels.GroupModel import GroupModel
+from DatabaseModels.UserModel import UserModel
+from DatabaseModels.PostModel import PostModel
 
 my_db = DB('db.db')
+
 AccountsDB = AccountModel(my_db)
-
-
-
-
-
-
-
+GroupsDB = GroupModel(my_db)
+UsersDB = UserModel(my_db)
+PostsDB = PostModel(my_db)
