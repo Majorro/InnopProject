@@ -6,10 +6,20 @@ from database_config import *
 
 @app.route("/", methods=['GET'])
 def index_get():
-    if 'login' in session:
-        return 'Вы авторизовались!'
-
+    if 'login' not in session:
+        return redirect('/login')
     return render_template('index.html')
+
+@app.route("/login", methods=['GET'])
+def login_get():
+    return render_template('auth.html')
+
+@app.route("/my_groups", methods=['GET'])
+def my_groups():
+    if 'login' not in session:
+        return redirect('/login')
+    return render_template('my_groups.html')
+
 
 @app.route("/del", methods=['GET'])
 def del_get():
@@ -18,10 +28,14 @@ def del_get():
     return redirect('/')
 
 
+
+
+
+
+
 @app.route("/req/auth", methods=['POST'])
 def req_auth_post():
     req = json.loads(request.data)
-
     result = dict()
     result['status'] = None
     result['message'] = None
@@ -42,6 +56,7 @@ def req_auth_post():
         result['message'] = 'Неправильный пароль'
         return jsonify(result)
 
+    print('Пользователь вошёл в систему', account['login'])
     result['status'] = 'Ok'
     result['message'] = ''
 
@@ -52,25 +67,50 @@ def req_auth_post():
 
 
 
-@app.route("/req", methods=['POST'])
+@app.route("/req/reg", methods=['POST'])
 def req_reg_post():
-    req = json.loads(request.data)
-    params = ['login', 'password', 'first_name', 'last_name', 'email', 'date', 'person_description', 'urls', 'image', 'sex']
-
     result = dict()
     result['status'] = None
     result['message'] = None
+
+    try:
+        req = json.loads(request.data)
+        if str(type(req)) != "<class 'dict'>":
+            result['status'] = 'Error'
+            result['message'] = 'Unknown error'
+            return result
+    except:
+        result['status'] = 'Error'
+        result['message'] = 'Unknown error'
+        return result
+
+    #print(req)
+
+    req['sex'] = 'male'
+    req['urls'] = {"facebook": "https://www.facebook.com/anton.naumtsev"}
+    req['image'] = 'test'
+
+    req['admin_groups'] = []
+    req['user_groups'] = []
+    req['invitations'] = []
+
+
+    params = ['login', 'password', 'first_name', 'last_name', 'email', 'date', 'person_description', 'urls', 'image', 'sex', 'admin_groups', 'user_groups', 'invitations']
+
+
 
     for w in params:
         if w not in req:
             result['status'] = 'Error'
             result['message'] = 'Missing attribute - ' + w
+            print('Пропущен атрибут ' + w)
             return jsonify(result)
 
 
     account = AccountsDB.get_by_login(req['login'])
 
     if not account is None:
+        print('Логин занят')
         result['status'] = 'Error'
         result['message'] = 'Данный логин уже зарегистрирован'
         return jsonify(result)
@@ -84,4 +124,5 @@ def req_reg_post():
 
     result['status'] = 'Ok'
     result['message'] = ''
+    print('Зарегистрировался новый пользователь ' + account['login'])
     return jsonify(result)
