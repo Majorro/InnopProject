@@ -33,7 +33,7 @@ body
 /* top_bar */
 #top_bar
 {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     flex-wrap: nowrap;
     align-items: stretch;
@@ -57,12 +57,12 @@ body
 
 .top_bar_button:hover
 {
-    background-color: rgb(105, 105, 105);
+    background-color: rgb(105, 105, 105, 0.5);
 }
 
 .top_bar_button:active
 {
-    background-color: rgb(173, 173, 173);
+    background-color: rgb(173, 173, 173, 0.5);
     transition: 0s;
 }
 /* top_bar end */
@@ -158,12 +158,12 @@ fa-telegram-plane:active, fa-vk:active, fa-instagram:active, fa-reddit-alien:act
 
 .fab:hover, .fas:hover
 {
-    color: white;
+    color: rgb(110, 110, 110);
 }
 
 .fab:active, .fas:active
 {
-    color: rgb(212, 212, 212);
+    color: rgb(184, 184, 184);
     transition: 0s;
 }
 
