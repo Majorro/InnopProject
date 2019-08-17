@@ -67,69 +67,115 @@ body
 }
 /* top_bar end */
 
-/* main_view */
+/* #main_view{} */
 
-h1
+.line
 {
-    font-weight: normal;
-    margin: 3vh auto 0 auto;
-    text-align: center;
-    font-size: 25px;
+    background-color: rgba(0, 0, 0, 0.25);
+    height: 2px;
+    width: 100%;
+    border-radius: 200px;
+    margin: 2vh 0;
 }
 
-#main_view
+/* sidebar */
+#side_bar
 {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin: 0 20vw 0 20vw;
-    padding-top: 4vh;
-    height: 81vh;
-    flex-wrap: wrap;
+    float: left;
+    width: 16vw;
+    height: 92.4vh;
+    background-color: rgba(0, 0, 0, 0.25);
 }
 
-.panel
+#group_info
 {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    min-width: 100px;
-}
-
-.group
-{
-    display: flex;
     flex-wrap: nowrap;
-    flex-direction: row;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 5vh;
+    padding-top: 2vh;
 }
 
 .group_logo_img
 {
-    height: 100px;
-    width: 100px;
-}
-
-.group_info
-{
-    padding: auto;
-    margin-left: 2vw;
+    height: 95px;
+    width: 95px;
 }
 
 .group_name
 {
-    margin: 0;
+    font-size: 22px;
+    margin: 1vh 0 0 0;
 }
 
 .group_members_counter
 {
     font-size: 16px;
+    text-align: center;
+    line-height: 80%;
 }
 
-.group_recommendations_counter
+.group_members
 {
-    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 1vw;
 }
-/* main_view end */
+
+.member
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    margin-bottom: 2vh;
+}
+
+.last_member
+{
+    margin-bottom: 0;
+}
+
+.member_avatar_img
+{
+    height: 60px;
+    width: 60px;
+    margin-right: 1vw;
+}
+
+.member_info
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.member_group_status
+{
+    margin: 0;
+    line-height: 0;
+}
+
+.far, .fas
+{
+    font-size: 14px;
+}
+
+.member_fullname
+{
+    font-size: 13px;
+    line-height: 20px;
+}
+/* sidebar end */
+
+/* viewport */
+#viewport
+{
+    float: right;
+}
+
+/* viewport end */
