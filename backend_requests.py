@@ -24,7 +24,7 @@ def my_groups():
 @app.route("/del", methods=['GET'])
 def del_get():
     global session
-    session = {}
+    session = {} 
     return redirect('/')
 
 

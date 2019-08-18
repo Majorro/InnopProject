@@ -4,6 +4,12 @@
     color: white;
 }
 
+
+div, p{
+    margin: 0;
+    padding: 0;
+}
+
 body
 {
     margin: 0;
@@ -40,20 +46,39 @@ body
     justify-content: space-between;
 }
 
-#main_page_button
-{
-    margin-left: 10vw;
-}
+
 
 .top_bar_button
 {
+    flex: 1;
+    vertical-align:middle;
     background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
-    border: 0px;
-    outline: none;
-    flex-basis: 20%;
-    padding: 2vh 0%;
+    text-align:center;
+    padding: 5px;
+    font-family: myriad-pro, sans-serif;
+    white-space: nowrap;
+
+    font-style: normal;
+    font-weight: 100;
+
+
+   
+    font-size: 25px;
+
+    
+
 }
+
+
+@media (max-width: 600px) {
+  .top_bar_button, .text__login{
+     font-size: 8px;
+  }
+}
+
+
+
 
 .top_bar_button:hover
 {
@@ -73,8 +98,6 @@ body
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 22vh 10vw 0 10vw;
-    height: 70vh;
 }
 
 #left_panel
@@ -82,6 +105,17 @@ body
     flex-basis: 35%;
     margin: 0 0 0 0;
 }
+
+
+.left_pad{
+    flex: 1;
+}
+
+
+.right_pad{
+    flex: 1;
+}
+
 
 #avatar
 {
@@ -108,7 +142,6 @@ body
     flex-direction: column;
     flex-basis: 60%;
     justify-content: space-between;
-    margin: 0 10vw 20vh 0;
 }
 
 #user_info{}
@@ -121,7 +154,7 @@ body
 #about_me
 {
     margin-top: 2vh;
-    width: 100%;
+    width: 400px;
     text-align: justify;
 }
 
@@ -143,28 +176,79 @@ fa-telegram-plane:active, fa-vk:active, fa-instagram:active, fa-reddit-alien:act
 } */
 
 #references
-{
+{   
+    width: 200px;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.fab, .fas
+.references__icon
 {
-    font-size: 30px;
+    font-size: 25px;
     cursor: pointer;
 }
 
-.fab:hover, .fas:hover
+.references__icon:hover
 {
     color: rgb(110, 110, 110);
 }
 
-.fab:active, .fas:active
+.references__icon:active
 {
     color: rgb(184, 184, 184);
     transition: 0s;
+}
+
+.text__login{
+    font-family: myriad-pro-condensed, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 27px;
+}
+
+
+
+.text__MiniInfo{
+    margin-top: 5px;
+    font-family: myriad-pro, sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 15px;
+
+}
+
+
+.text__about_me{
+    font-family: myriad-pro-condensed, sans-serif;
+    font-style: italic;
+    font-weight: 500;  
+    font-size: 22px;  
+}
+
+
+.text__descriprion{
+    width: 350px;
+    font-family: myriad-pro, sans-serif;
+    white-space:pre-wrap;
+    font-style: normal;
+    font-weight: 10;
+    font-size: 15px;
+}
+
+.block__content{
+   position: absolute;
+   left: 50%;
+   transform:translateX(-50%);
+   margin-top: 15vh;
+}
+
+
+.sex__icon{
+    font-size: 25px;
+
+
 }
 
 /* main_view end */
