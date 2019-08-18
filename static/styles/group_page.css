@@ -67,7 +67,14 @@ body
 }
 /* top_bar end */
 
-/* #main_view{} */
+#main_view
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+/* lines */
 
 .line
 {
@@ -75,13 +82,26 @@ body
     height: 2px;
     width: 100%;
     border-radius: 200px;
+}
+
+.sidebar_line
+{
     margin: 2vh 0;
 }
+
+.viewport_title_line
+{
+    margin: 0.5vh 2vw 0 0;
+    margin-right: 2vw;
+    width: initial;
+}
+
+/* .recommendation_panel_line{} */
+/* lines end */
 
 /* sidebar */
 #side_bar
 {
-    float: left;
     width: 16vw;
     height: 92.4vh;
     background-color: rgba(0, 0, 0, 0.25);
@@ -162,20 +182,56 @@ body
 
 .far, .fas
 {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .member_fullname
 {
     font-size: 13px;
-    line-height: 20px;
+    line-height: 18px;
 }
 /* sidebar end */
 
 /* viewport */
 #viewport
 {
-    float: right;
+    padding-left: 2vw;
+    width: 100%;
 }
 
+#viewport_title
+{
+    margin: 2vh 0 0 0;
+    font-size: 25px;
+}
+
+#recommendations_holder
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 3vh;
+}
+
+.recommendation_panel
+{
+    background-color: rgb(72, 66, 60);
+    border-radius: 10px;
+    padding: 0.5vh 1vw;
+    margin: 0 2vw 2vw 0;
+    height: 36vh;
+    width: 23.7vw;
+}
+
+.recommendation_title
+{
+    font-size: 18px;
+    margin-bottom: 0.5vh;
+}
+
+.recommendation
+{
+    font-size: 14px;
+    margin: 1.5vh 0 0 0;
+}
 /* viewport end */
