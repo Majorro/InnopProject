@@ -4,6 +4,15 @@ import requests
 from flask import request, session, make_response, jsonify, Response, render_template, redirect
 from database_config import *
 
+def error(comment):
+    result = dict()
+    result['status'] = 'Error'
+    result['message'] = comment
+    return jsonify(result)
+
+
+
+
 @app.route("/", methods=['GET'])
 def index_get():
     if 'login' not in session:
@@ -42,22 +51,17 @@ def req_auth_post():
     result['message'] = None
 
     if 'login' not in req or 'password' not in req:
-        result['status'] = 'Error'
-        result['message'] = 'Недостаточно данных'
-        return jsonify(result)
+        return error('Недостаточно данных')
 
     account = AccountsDB.get_by_login(req['login'])
     if account is None:
-        result['status'] = 'Error'
-        result['message'] = 'Пользователя не существует'
-        return jsonify(result)
+        return error('Пользователя не существует')
 
     if account['password'] != req['password']:
-        result['status'] = 'Error'
-        result['message'] = 'Неправильный пароль'
-        return jsonify(result)
+        return error('Неправильный пароль')
 
     print('Пользователь вошёл в систему', account['login'])
+
     result['status'] = 'Ok'
     result['message'] = ''
 
@@ -77,16 +81,11 @@ def req_reg_post():
     try:
         req = json.loads(request.data)
         if str(type(req)) != "<class 'dict'>":
-            result['status'] = 'Error'
-            result['message'] = 'Unknown error'
-            return result
+            return error('Unknown error')
     except:
-        result['status'] = 'Error'
-        result['message'] = 'Unknown error'
-        return result
+        return error('Unknown error')
 
     #print(req)
-
     req['sex'] = 'male'
     req['urls'] = {"facebook": "https://www.facebook.com/anton.naumtsev"}
     req['image'] = 'test'
@@ -102,19 +101,15 @@ def req_reg_post():
 
     for w in params:
         if w not in req:
-            result['status'] = 'Error'
-            result['message'] = 'Missing attribute - ' + w
             print('Пропущен атрибут ' + w)
-            return jsonify(result)
+            return error('Missing attribute - ' + w)
 
 
     account = AccountsDB.get_by_login(req['login'])
 
     if not account is None:
         print('Логин занят')
-        result['status'] = 'Error'
-        result['message'] = 'Данный логин уже зарегистрирован'
-        return jsonify(result)
+        return error('Данный логин уже зарегистрирован')
 
 
     account = dict()
@@ -137,9 +132,7 @@ def req_get_user_info_get():
     result['message'] = None
 
     if 'login' not in session:
-        result['status'] = 'Error'
-        result['message'] = 'User is not authorized'
-        return result
+        return error('User is not authorized')
 
     account = AccountsDB.get_by_login(session['login'])
     return jsonify(account)
@@ -149,20 +142,92 @@ def req_get_user_info_id_get(id):
     result = dict()
     result['status'] = None
     result['message'] = None
-    
+
     try:
         id = int(id)
     except:
-
+        return error('Wrong id')
 
 
     if 'login' not in session:
-        result['status'] = 'Error'
-        result['message'] = 'User is not authorized'
-        return result
+        return error('User is not authorized')
 
-    account = AccountsDB.get_by_login(session['login'])
+    account = AccountsDB.get_by_id(id)
+
+    if account is None:
+        return error('Nonexistent id')
+
     return jsonify(account)
 
 
+@app.route("/req/get_group_info/<id>", methods=['GET'])
+def req_get_group_info_id_get(id):
+    result = dict()
+    result['status'] = None
+    result['message'] = None
 
+    try:
+        id = int(id)
+    except:
+        return error('Wrong id')
+
+    if 'login' not in session:
+        return error('User is not authorized')
+
+    group = GroupsDB.get_by_id(id)
+
+    if group is None:
+        return error('Nonexistent id')
+    return jsonify(group)
+
+
+
+
+@app.route("/req/get_group_info/<id>", methods=['GET'])
+def req_get_group_info_id_get(id):
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+
+    try:
+        id = int(id)
+    except:
+        return error('Wrong id')
+
+    if 'login' not in session:
+        return error('User is not authorized')
+
+    group = GroupsDB.get_by_id(id)
+
+    if group is None:
+        return error('Nonexistent id')
+    return jsonify(group)
+
+
+@app.route("/req/get_recomendation/<group_id>", methods=['GET'])
+def req_get_recomendation_group_id(group_id):
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+
+    try:
+        group_id = int(group_id)
+    except:
+        return error('Wrong group_id')
+
+    if 'login' not in session:
+        return error('User is not authorized')
+
+    group = GroupsDB.get_by_id(group_id)
+
+    if group is None:
+        return error('Nonexistent group_id')
+
+    for acc_id, user_id in group['members_id']:
+        if session['account_id'] == acc_id:
+            user = UsersDB.get_by_id(user_id)
+            if user is None:
+                continue
+            return jsonify(user['result_recommendation'])
+
+    return error('User is not member this group')

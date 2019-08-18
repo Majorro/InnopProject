@@ -4,8 +4,6 @@
     color: white;
 }
 
-
-
 a {
   text-decoration: none
 }
@@ -56,7 +54,6 @@ body
 }
 
 
-
 .top_bar_button
 {
     color: white;
@@ -74,6 +71,7 @@ body
     font-style: normal;
     font-weight: 100;
     font-size: 20px;
+<<<<<<< HEAD
 }
 
 .left_pad{
@@ -83,6 +81,8 @@ body
 
 .right_pad{
     flex: 1;
+=======
+>>>>>>> 7c78b90913f9bb196dc949bdb941d49167924218
 }
 
 
@@ -115,6 +115,18 @@ body
     margin: 0 0 0 0;
 }
 
+<<<<<<< HEAD
+=======
+.left_pad{
+    flex: 1;
+}
+
+
+.right_pad{
+    flex: 1;
+}
+
+>>>>>>> 7c78b90913f9bb196dc949bdb941d49167924218
 
 #avatar
 {
@@ -143,7 +155,7 @@ body
     justify-content: space-between;
 }
 
-#user_info{}
+/*#user_info{}*/
 
 .fa-mars
 {
@@ -249,5 +261,4 @@ fa-telegram-plane:active, fa-vk:active, fa-instagram:active, fa-reddit-alien:act
 
 
 }
-
 /* main_view end */
