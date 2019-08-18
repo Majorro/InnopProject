@@ -10,9 +10,13 @@ def index_get():
         return redirect('/login')
     return render_template('index.html')
 
+
 @app.route("/login", methods=['GET'])
 def login_get():
     return render_template('auth.html')
+
+
+
 
 @app.route("/my_groups", methods=['GET'])
 def my_groups():
@@ -24,7 +28,7 @@ def my_groups():
 @app.route("/del", methods=['GET'])
 def del_get():
     global session
-    session = {} 
+    session = {}
     return redirect('/')
 
 

@@ -5,6 +5,11 @@
 }
 
 
+
+a {
+  text-decoration: none
+}
+
 div, p{
     margin: 0;
     padding: 0;
@@ -50,34 +55,25 @@ body
 
 .top_bar_button
 {
+    color: white;
+    margin: 0 20px;
+    padding: 5px;
     flex: 1;
     vertical-align:middle;
     background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
     text-align:center;
-    padding: 5px;
+   
     font-family: myriad-pro, sans-serif;
     white-space: nowrap;
 
     font-style: normal;
     font-weight: 100;
-
-
-   
-    font-size: 25px;
+    font-size: 20px;
 
     
 
 }
-
-
-@media (max-width: 600px) {
-  .top_bar_button, .text__login{
-     font-size: 8px;
-  }
-}
-
-
 
 
 .top_bar_button:hover
