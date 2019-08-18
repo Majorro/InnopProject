@@ -7,6 +7,10 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
         <script src="https://kit.fontawesome.com/6a4be30845.js"></script>
+
+        <!-- Шрифт Myriad Pro -->
+    	<link rel="stylesheet" href="https://use.typekit.net/nqp7dcb.css">
+
     </head>
     
     <body>
@@ -16,39 +20,60 @@
         
         <!-- top_bar -->
         <div id="top_bar">
-            <button id="main_page_button" class="top_bar_button">Главная</button>
-            <button class="top_bar_button">Приглашения</button>
-            <button class="top_bar_button">Группы</button>
-            <button class="top_bar_button">Админ page</button>
+        	<div class="left_pad"></div>
+            <div class="top_bar_button"><a href="/">Главная</a></div>
+            <div class="top_bar_button"><a href="/">Приглашения</a></div>
+           	<div class="top_bar_button"><a href="/">Группы</a></div>
+            <div class="top_bar_button"><a href="/">Админ панель</a></div>
+			<div class="right_pad"></div>
         </div>
         <!-- end -->
 
+
+
+
         <!-- main_view -->
-        <div id="main_view">
-            <div id="left_panel">
-                <div id="avatar">
-                    <!-- <img id="avatar_img" src="../static/images/more_fashion_avatar.jpg" alt="Avatar"> -->
-                </div>
-            </div>
-            
-            <div id="right_panel">
-                <div id="user_info">
-                    Majorro <br>
-                    Диджей Андрей Балконский<br>
-                    Россия, ИннОполис<br>
-                    Дата рождения : 228 год до н.э.
-                </div>
-                <p id="about_me">
-                    Ааоаооаа ооаоаоаоаоао аоаоаоаоаоаооао  аоаоаоаоаоаоа ммммммммммм мммммммммм ммммммммммм мммммммммм мммммммммммм
-                </p>
-                <div id="references">
-                    <i class="fab fa-telegram-plane"></i>
-                    <i class="fab fa-vk"></i>
-                    <i class="fab fa-instagram"></i>
-                    <i class="fab fa-reddit-alien"></i>
-                    <i class="fas fa-bolt"></i>
-                </div>
-            </div>
+        
+        <div class="block__content">
+	        <div id="main_view">
+	            <div id="left_panel">
+	                <div id="avatar">
+	                    <!-- <img id="avatar_img" src="../static/images/more_fashion_avatar.jpg" alt="Avatar"> -->
+	                </div>
+	            </div>
+	            
+	            <div id="right_panel">
+	                <div id="user_info">
+	                	
+
+	             		<span class="person__login">
+		                	<i class="fas fa-mars sex__icon"></i>
+		               		<span class="text__login">Golovanov</span>
+	               		</span>
+	       
+	                    <div class="text__MiniInfo">
+		                    Голованов Александр<br>
+		                    Россия, Москва<br>
+		                    Дата рождения: 20 февраля 1990 
+	                    </div>
+	                </div>
+
+
+	                <div id="about_me">
+	                	<div class="text__about_me"> О себе:</div> 
+	                	<div class="text__descriprion">Обожаю ездить на рыбалку, умею играть на гитаре. Люблю играть в баскетбол, футбол, волейбол.</div>
+	                </div>
+
+
+	                <div id="references">
+	                    <i class="fab fa-telegram-plane references__icon"></i>
+	                    <i class="fab fa-vk references__icon"></i>
+	                    <i class="fab fa-instagram references__icon"></i>
+	                    <i class="fab fa-reddit-alien references__icon"></i>
+	                    <i class="fas fa-bolt references__icon"></i>
+	                </div>
+	            </div>
+	        </div>
         </div>
         <!-- end -->
         <script src="../static/scripts/main.js" ></script>

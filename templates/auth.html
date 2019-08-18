@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css">
+    <link href="https://fonts.googleapis.com/css?family=Maven+Pro&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../static/styles/auth.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <script src="../static/scripts/auth.js" type="application/javascript"></script>
+    <title>Auth</title>
+</head>
+<body>
+<div class="bg_image"></div>
+<div class="container">
+    <div class="nav">
+        <div class="change auth_btn checked">Sign in</div>
+        <div class="change reg_btn">Sign Up</div>
+    </div>
+    <div class="auth">
+        <form class="form">
+            <div class="form-group">
+                <h3 class="form-label">Login</h3>
+                <input type="text" placeholder=" Input your login" class="form-input" name="login" required>
+            </div>
+            <div class="form-group">
+                <h3 class="form-label">Password</h3>
+                <input type="password" placeholder=" Input your password" class="form-input" name="password" required>
+            </div>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+
+            <button class='login-button' type="submit">Submit</button>
+        </form>
+    </div>
+    <div class="reg">
+        <form class="form">
+            <div class="form-group">
+                <h3 class="form-label">Login</h3>
+                <input type="text" placeholder=" Input your login" class="form-input" name="login" required>
+            </div>
+            <div class="form-group">
+                <h3 class="form-label">Email</h3>
+                <input type="email" placeholder=" Input your email" class="form-input" name="email" required>
+            </div>
+            <div class="form-group">
+                <h3 class="form-label">First name</h3>
+                <input type="text" placeholder=" Input your first name" class="form-input" name="first_name" required>
+            </div>
+            <div class="form-group">
+                <h3 class="form-label">Last name</h3>
+                <input type="text" placeholder=" Input your last name" class="form-input" name="last_name" required>
+            </div>
+            <div class="form-group">
+                <h3 class="control-label">Birthday date</h3>
+                <input class="form-input" name="date" placeholder="DD.MM.YYYY" type="date"/>
+            </div>
+            <div class="form-group">
+                <h3 class="form-label">Password</h3>
+                <input type="password" placeholder=" Input your password" class="form-input" name="password" required>
+            </div>
+            <div class="form-group">
+                <h3 class="form-label">Confirm Password</h3>
+                <input type="password" placeholder=" Input your password again" class="form-input" name="confirm_password" required>
+            </div>
+            <div class="form-group">
+                <h3 class="form-label">Your description</h3>
+                <textarea placeholder=" Input your description" class="form-input" name="person_description" required></textarea>
+            </div>
+            <button class='login-button' type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
