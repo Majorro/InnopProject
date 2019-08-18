@@ -1,0 +1,237 @@
+* {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    color: white;
+}
+
+body
+{
+    margin: 0;
+    background-color: rgb(0, 0, 0, 0.8);
+}
+
+.bg_image
+{
+    /* IT WORKS DONT TOUCH */
+    background:
+    linear-gradient(
+          rgba(0, 0, 0, 0.5), 
+          rgba(0, 0, 0, 0.5)
+        ),
+    url("../images/more_fashion_avatar.jpg");
+    /* IT WORKS DONT TOUCH */
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    position: fixed;
+    filter: blur(25px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* top_bar */
+#top_bar
+{
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+#main_page_button
+{
+    margin-left: 10vw;
+}
+
+.top_bar_button
+{
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    border: 0px;
+    outline: none;
+    flex-basis: 20%;
+    padding: 2vh 0%;
+}
+
+.top_bar_button:hover
+{
+    background-color: rgb(105, 105, 105, 0.5);
+}
+
+.top_bar_button:active
+{
+    background-color: rgb(173, 173, 173, 0.5);
+    transition: 0s;
+}
+/* top_bar end */
+
+#main_view
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+/* lines */
+
+.line
+{
+    background-color: rgba(0, 0, 0, 0.25);
+    height: 2px;
+    width: 100%;
+    border-radius: 200px;
+}
+
+.sidebar_line
+{
+    margin: 2vh 0;
+}
+
+.viewport_title_line
+{
+    margin: 0.5vh 2vw 0 0;
+    margin-right: 2vw;
+    width: initial;
+}
+
+/* .recommendation_panel_line{} */
+/* lines end */
+
+/* sidebar */
+#side_bar
+{
+    width: 16vw;
+    height: 92.4vh;
+    background-color: rgba(0, 0, 0, 0.25);
+}
+
+#group_info
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding-top: 2vh;
+}
+
+.group_logo_img
+{
+    height: 95px;
+    width: 95px;
+}
+
+.group_name
+{
+    font-size: 22px;
+    margin: 1vh 0 0 0;
+}
+
+.group_members_counter
+{
+    font-size: 16px;
+    text-align: center;
+    line-height: 80%;
+}
+
+.group_members
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0 1vw;
+}
+
+.member
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+    margin-bottom: 2vh;
+}
+
+.last_member
+{
+    margin-bottom: 0;
+}
+
+.member_avatar_img
+{
+    height: 60px;
+    width: 60px;
+    margin-right: 1vw;
+}
+
+.member_info
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.member_group_status
+{
+    margin: 0;
+    line-height: 0;
+}
+
+.far, .fas
+{
+    font-size: 16px;
+}
+
+.member_fullname
+{
+    font-size: 13px;
+    line-height: 18px;
+}
+/* sidebar end */
+
+/* viewport */
+#viewport
+{
+    padding-left: 2vw;
+    width: 100%;
+}
+
+#viewport_title
+{
+    margin: 2vh 0 0 0;
+    font-size: 25px;
+}
+
+#recommendations_holder
+{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 3vh;
+}
+
+.recommendation_panel
+{
+    background-color: rgb(72, 66, 60);
+    border-radius: 10px;
+    padding: 0.5vh 1vw;
+    margin: 0 2vw 2vw 0;
+    height: 36vh;
+    width: 23.7vw;
+}
+
+.recommendation_title
+{
+    font-size: 18px;
+    margin-bottom: 0.5vh;
+}
+
+.recommendation
+{
+    font-size: 14px;
+    margin: 1.5vh 0 0 0;
+}
+/* viewport end */

@@ -4,8 +4,6 @@
     color: white;
 }
 
-
-
 a {
   text-decoration: none
 }
@@ -52,7 +50,6 @@ body
 }
 
 
-
 .top_bar_button
 {
     color: white;
@@ -70,9 +67,6 @@ body
     font-style: normal;
     font-weight: 100;
     font-size: 20px;
-
-    
-
 }
 
 
@@ -101,7 +95,6 @@ body
     flex-basis: 35%;
     margin: 0 0 0 0;
 }
-
 
 .left_pad{
     flex: 1;
@@ -140,7 +133,7 @@ body
     justify-content: space-between;
 }
 
-#user_info{}
+/*#user_info{}*/
 
 .fa-mars
 {
@@ -246,5 +239,4 @@ fa-telegram-plane:active, fa-vk:active, fa-instagram:active, fa-reddit-alien:act
 
 
 }
-
 /* main_view end */
