@@ -34,9 +34,6 @@ def del_get():
 
 
 
-
-
-
 @app.route("/req/auth", methods=['POST'])
 def req_auth_post():
     req = json.loads(request.data)
@@ -130,3 +127,42 @@ def req_reg_post():
     result['message'] = ''
     print('Зарегистрировался новый пользователь ' + account['login'])
     return jsonify(result)
+
+
+
+@app.route("/req/get_user_info", methods=['GET'])
+def req_get_user_info_get():
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+
+    if 'login' not in session:
+        result['status'] = 'Error'
+        result['message'] = 'User is not authorized'
+        return result
+
+    account = AccountsDB.get_by_login(session['login'])
+    return jsonify(account)
+
+@app.route("/req/get_user_info/<id>", methods=['GET'])
+def req_get_user_info_id_get(id):
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+    
+    try:
+        id = int(id)
+    except:
+
+
+
+    if 'login' not in session:
+        result['status'] = 'Error'
+        result['message'] = 'User is not authorized'
+        return result
+
+    account = AccountsDB.get_by_login(session['login'])
+    return jsonify(account)
+
+
+

@@ -123,12 +123,12 @@ h1
     margin: 0;
 }
 
-.group_members
+.group_members_counter
 {
     font-size: 16px;
 }
 
-.group_recommendations
+.group_recommendations_counter
 {
     font-size: 16px;
 }
