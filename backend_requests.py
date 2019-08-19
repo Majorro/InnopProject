@@ -206,7 +206,7 @@ def req_get_group_info_id_get(id):
     return jsonify(result)
 
 
-@app.route("/req/get_recomendation/<group_id>", methods=['GET'])
+@app.route("/req/get_my_recommendations/<group_id>", methods=['GET'])
 def req_get_recomendation_group_id(group_id):
     result = dict()
     result['status'] = None
@@ -247,6 +247,7 @@ def req_send_eval_group_id(group_id):
         return error('User is not authorized')
 
     group = GroupsDB.get_by_id(group_id)
+
     if group is None:
         return error('Nonexistent group_id')
 
@@ -261,8 +262,9 @@ def req_send_eval_group_id(group_id):
             return error('Missing attribute - ' + par)
 
     post_id = PostsDB.insert(req)
-    user = UsersDB.get_by_id(get_user_id_in_group(req['appreciated_id'], group_id))
+    user = UsersDB.get_one_by_group_id_and_account_id(group_id, req['appreciated_id'])
     user['posts'].append(post_id)
+
     UsersDB.update_user(user)
 
     result['status'] = 'Ok'
@@ -270,9 +272,9 @@ def req_send_eval_group_id(group_id):
 
     return jsonify(result)
 
+###
 
-
-@app.route("/req/get_posts/<group_id>", methods=['GET'])
+@app.route("/req/get_my_posts/<group_id>", methods=['GET'])
 def req_get_posts_id(group_id):
     result = dict()
     result['status'] = None
@@ -286,12 +288,48 @@ def req_get_posts_id(group_id):
     if 'login' not in session:
         return error('User is not authorized')
 
-    posts = PostsDB.get_all_by_group_id(group_id)
+    posts = PostsDB.get_all_by_group_id_and_account_id(group_id, session['account_id'])
 
     result['status'] = 'Ok'
     result['message'] = ''
+
     result['data'] = posts
+
     return jsonify(result)
 
-#
+
+
+
+
+@app.route("/req/update_recommendations/<group_id>/<account_id>", methods=['POST'])
+def req_update_recommendations(group_id, account_id):
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+
+    try:
+        group_id = int(group_id)
+        account_id = int(account_id)
+    except:
+        return error('Wrong one of ids')
+
+    user = UsersDB.get_one_by_group_id_and_account_id(group_id, account_id)
+
+    all_posts = []
+
+    for id_post in user['posts']:
+        post = PostsDB.get_by_id(id_post)
+        all_posts.append(post)
+
+    from assessment_functions import update_user_recommendation
+    new_user = update_user_recommendation(user, all_posts)
+
+    UsersDB.update_user(new_user)
+
+    result['status'] = 'Ok'
+    result['message'] = ''
+
+    return jsonify(result)
+
+
 

@@ -118,6 +118,15 @@ class PostModel:
             all.append(postdata_to_json(w))
         return all
 
+    def get_all_by_group_id_and_account_id(self, group_id, account_id):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM posts WHERE group_id = ? AND appreciated_id = ?", (str(group_id), str(account_id)))
+        rows = cursor.fetchall()
+        all = []
+        for w in rows:
+            all.append(postdata_to_json(w))
+        return all
+
 '''
 post = dict()
 post['author_id'] = 1
