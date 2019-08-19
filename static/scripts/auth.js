@@ -23,7 +23,13 @@ $(document)
                 method: 'POST',
                 body: JSON.stringify(data),
             }).then((response) => response.json())
-                .then((data) => console.log(data.status))
+                .then((data) => {
+                    if(data.status === 'Ok') {
+                        window.location.replace('/');
+                    } else {
+                        alert(data.message);
+                    }
+                })
                 .catch((error) => console.log(error));
         } else {
             if (data['password'] !== data['confirm_password']) {
@@ -32,49 +38,25 @@ $(document)
                 delete data['confirm_password'];
                 $('#toBase64').attr('src', data.image);
                 const reader = new FileReader();
-                reader.onload = function(e){
+                reader.onload = function (e) {
                     const arrayBuffer = e.target.result;
                     data.image = arrayBuffer;
                     fetch('/req/reg', {
-                    method: 'POST',
-                    body: JSON.stringify(data),
-                }).then((response) => response.json())
-                    .then((data) => console.log(data.status))
-                    .catch((error) => console.log(error));
+                        method: 'POST',
+                        body: JSON.stringify(data),
+                    }).then((response) => response.json())
+                        .then((data) => {
+                            if(data.status === 'Ok') {
+                                window.location.replace('/');
+                            } else {
+                                alert(data.message);
+                            }
+                        })
+                        .catch((error) => console.log(error));
                 };
                 reader.readAsDataURL($('#file').prop('files')[0]);
-                console.log($('#file').prop('files')[0]);
             }
         }
         console.log(data);
     });
 
-// document.querySelector('#file').addEventListener('change', function(){
-//     var reader = new FileReader();
-//     reader.onload = function(){
-//         var arrayBuffer = this.result;
-//         console.log(arrayBuffer);
-//         document.querySelector('#result').innerHTML = arrayBuffer + '  '+arrayBuffer.byteLength;
-//     };
-//     reader.readAsArrayBuffer(this.files[0]);
-// }, false);
-
-// function getBase64Image(img) {
-//     // создаем канвас элемент
-//     const canvas = document.createElement("canvas");
-//     canvas.width = img.width;
-//     canvas.height = img.height;
-//
-//     // Копируем изображение на канвас
-//     const ctx = canvas.getContext("2d");
-//     ctx.drawImage(img, 0, 0);
-//
-//     // Получаем data-URL отформатированную строку
-//     // Firefox поддерживает PNG и JPEG.
-//     const dataURL = canvas.toDataURL("image/png");
-//
-//     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-// }
-// function getBase64ImageById(id){
-//    return getBase64Image(document.getElementById(id));
-// }
