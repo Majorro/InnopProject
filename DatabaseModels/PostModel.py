@@ -4,12 +4,16 @@ def postdata_to_json(row):
     if row is None:
         return None
 
-    post_id, author_id, date, parameters, comment = row
+    post_id, author_id, appreciated_id, group_id, date, parameters, comment = row
 
     post = dict()
 
     post['post_id'] = post_id
+
     post['author_id'] = author_id
+    post['appreciated_id'] = appreciated_id
+    post['group_id'] = group_id
+    post['appreciated_id'] = appreciated_id
     post['date'] = date
     post['parameters'] = json.loads(parameters)
     post['comment'] = comment
@@ -23,9 +27,13 @@ class PostModel:
 
     def init_table(self):
         cursor = self.connection.cursor()
+
+        #post_id, author_id, appreciated_id, group_id, date, parameters, comment
         cursor.execute('''CREATE TABLE IF NOT EXISTS posts (
                             post_id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                            author_id TEXT,
+                            author_id INTEGER,
+                            appreciated_id INTEGER,
+                            group_id INTEGER,
                             date BLOB,
                             parameters BLOB,
                             comment BLOB
@@ -40,13 +48,17 @@ class PostModel:
     def insert(self, post):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO posts ( 
-                            author_id,
-                            date,
-                            parameters,
+                            author_id, 
+                            appreciated_id,
+                            group_id,
+                            date, 
+                            parameters, 
                             comment) 
 
                 VALUES (?, ?, ?, ?)''', (
                 post['author_id'],
+                post['appreciated_id'],
+                post['group_id'],
                 post['date'],
                 json.dumps(post['parameters']),
                 post['comment']
@@ -73,11 +85,15 @@ class PostModel:
         cursor = self.connection.cursor()
         cursor.execute('''UPDATE posts SET  
                                         author_id = '{}',
+                                        appreciated_id = '{}',
+                                        group_id = '{}',
                                         date='{}',
                                         parameters='{}',
                                         comment='{}'
                                         WHERE post_id = ?'''.format(
             post['author_id'],
+            post['appreciated_id'],
+            post['group_id'],
             post['date'],
             json.dumps(post['parameters']),
             post['comment']),
@@ -97,6 +113,8 @@ class PostModel:
 '''
 post = dict()
 post['author_id'] = 1
+post['appreciated_id'] = 2
+post['group_id'] = 3
 post['date'] = '01.02.2001'
 post['parameters'] = {'param1':'123123', 'param2': '123', 'param3': {'param4': '123', 'param5': '123'}}
 post['comment'] = 'Вы плохо высказывает свои мысли, постарайтесь выражаться более внятно.'

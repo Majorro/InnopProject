@@ -10,9 +10,6 @@ def error(comment):
     result['message'] = comment
     return jsonify(result)
 
-
-
-
 @app.route("/", methods=['GET'])
 def index_get():
     if 'login' not in session:
@@ -25,8 +22,6 @@ def login_get():
     return render_template('auth.html')
 
 
-
-
 @app.route("/my_groups", methods=['GET'])
 def my_groups():
     if 'login' not in session:
@@ -34,13 +29,23 @@ def my_groups():
     return render_template('my_groups.html')
 
 
-@app.route("/del", methods=['GET'])
-def del_get():
+
+@app.route("/logout", methods=['GET'])
+def logout_get():
     global session
     session = {}
     return redirect('/')
 
+@app.route('/error')
+@app.errorhandler(404)
+def not_found_page(error):
+    if 'login' not in session:
+        return redirect('/')
 
+    return '404',    404
+
+
+###  API
 
 
 @app.route("/req/auth", methods=['POST'])
@@ -149,6 +154,7 @@ def req_get_user_info_get():
     result['data'] = account
     return jsonify(result)
 
+
 @app.route("/req/get_user_info/<id>", methods=['GET'])
 def req_get_user_info_id_get(id):
     result = dict()
@@ -237,8 +243,6 @@ def req_send_eval_group_id(group_id):
     except:
         return error('Wrong group_id')
 
-
-
     if 'login' not in session:
         return error('User is not authorized')
 
@@ -247,17 +251,24 @@ def req_send_eval_group_id(group_id):
         return error('Nonexistent group_id')
 
 
-
-
     req = json.loads(request.data)
+    req['group_id'] = group_id
 
     params = ['author_id', 'appreciated_id', 'group_id', 'date', 'parameters', 'comment']
+
     for par in params:
         if par not in req:
             return error('Missing attribute - ' + par)
 
+    post_id = PostsDB.insert(req)
+    user = UsersDB.get_by_id(get_user_id_in_group(req['appreciated_id'], group_id))
+    user['posts'].append(post_id)
+    UsersDB.update_user(user)
 
-    return error('User is not member this group')
+    result['status'] = 'Ok'
+    result['message'] = ''
+
+    return jsonify(result)
 
 
 
