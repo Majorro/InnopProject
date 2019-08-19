@@ -117,70 +117,95 @@ textarea {
     resize: none;
     height: 100px;
 }
-
-.btn-tertiary {
-    color: #555;
-    padding: 0;
-    line-height: 40px;
-    width: 300px;
-    margin: auto;
-    display: block;
-    border: 2px solid #555
+.custom-file-input::-webkit-file-upload-button {
+    visibility: hidden;
 }
-
-.btn-tertiary:hover, .example-2 .btn-tertiary:focus {
-    color: #888;
-    border-color: #888
-}
-
-.input-file {
-    width: .1px;
-    height: .1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1
-}
-
-.input-file + .js-labelFile {
-    overflow: hidden;
-    text-overflow: ellipsis;
+.custom-file-input::before {
+    content: 'Select some files';
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(top, #f9f9f9, #e3e3e3);
+    border: 1px solid #999;
+    border-radius: 3px;
+    padding: 5px 8px;
+    outline: none;
     white-space: nowrap;
-    padding: 0 10px;
-    cursor: pointer
-}
-
-.input-file + .js-labelFile .icon:before {
-    content: "\f093"
-}
-
-.input-file + .js-labelFile.has-file .icon:before {
-    content: "\f00c";
-    color: #5AAC7B
-}
-.inputfile {
-	width: 0.1px;
-	height: 0.1px;
-	opacity: 0;
-	overflow: hidden;
-	position: absolute;
-	z-index: -1;
-}
-.inputfile + label {
-    font-size: 1.25em;
-    font-weight: 700;
-    color: white;
-    background-color: black;
-    display: inline-block;
+    -webkit-user-select: none;
     cursor: pointer;
+    text-shadow: 1px 1px #fff;
+    font-weight: 700;
+    font-size: 10pt;
+    height: 10px;
+    width: 95px;
 }
-.inputfile + label:hover {
-    background-color: red;
+.custom-file-input:hover::before {
+    border-color: black;
 }
+.custom-file-input:active::before {
+    background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+}
+
+/*.btn-tertiary {*/
+/*    color: #555;*/
+/*    padding: 0;*/
+/*    line-height: 40px;*/
+/*    width: 300px;*/
+/*    margin: auto;*/
+/*    display: block;*/
+/*    border: 2px solid #555*/
+/*}*/
+
+/*.btn-tertiary:hover, .example-2 .btn-tertiary:focus {*/
+/*    color: #888;*/
+/*    border-color: #888*/
+/*}*/
+
+/*.input-file {*/
+/*    width: .1px;*/
+/*    height: .1px;*/
+/*    opacity: 0;*/
+/*    overflow: hidden;*/
+/*    position: absolute;*/
+/*    z-index: -1*/
+/*}*/
+
+/*.input-file + .js-labelFile {*/
+/*    overflow: hidden;*/
+/*    text-overflow: ellipsis;*/
+/*    white-space: nowrap;*/
+/*    padding: 0 10px;*/
+/*    cursor: pointer*/
+/*}*/
+
+/*.input-file + .js-labelFile .icon:before {*/
+/*    content: "\f093"*/
+/*}*/
+
+/*.input-file + .js-labelFile.has-file .icon:before {*/
+/*    content: "\f00c";*/
+/*    color: #5AAC7B*/
+/*}*/
+/*.inputfile {*/
+/*	width: 0.1px;*/
+/*	height: 0.1px;*/
+/*	opacity: 0;*/
+/*	overflow: hidden;*/
+/*	position: absolute;*/
+/*	z-index: -1;*/
+/*}*/
+/*.inputfile + label {*/
+/*    font-size: 1.25em;*/
+/*    font-weight: 700;*/
+/*    color: white;*/
+/*    background-color: black;*/
+/*    display: inline-block;*/
+/*    cursor: pointer;*/
+/*}*/
+/*.inputfile + label:hover {*/
+/*    background-color: red;*/
+/*}*/
 .image-label{
     padding: 5px;
     border-radius: 3px;
-}
-.avatar-pic {
-width: 150px;
 }
