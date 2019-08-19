@@ -231,7 +231,7 @@ def req_get_recomendation_group_id(group_id):
     return jsonify(result)
 
 
-
+#
 @app.route("/req/send_eval/<group_id>", methods=['GET'])
 def req_send_eval_group_id(group_id):
     result = dict()
