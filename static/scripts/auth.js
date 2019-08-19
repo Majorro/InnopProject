@@ -1,16 +1,16 @@
 let auth = true;
 $(document)
-    .on('click', '.change', function () {
+    .on('click', '.reg_btn', function () {
         $(this).addClass('checked').siblings().removeClass('checked');
-        if (auth) {
-            $('.auth').css('display', 'none');
-            $('.reg').css('display', 'block');
-            auth = false;
-        } else {
-            $('.reg').css('display', 'none');
-            $('.auth').css('display', 'block');
-            auth = true;
-        }
+        $('.auth').css('display', 'none');
+        $('.reg').css('display', 'block');
+        auth = false;
+    })
+    .on('click', '.auth_btn', function () {
+        $(this).addClass('checked').siblings().removeClass('checked');
+        $('.reg').css('display', 'none');
+        $('.auth').css('display', 'block');
+        auth = true;
     })
     .on('submit', '.form', function (e) {
         e.preventDefault();
@@ -30,12 +30,36 @@ $(document)
                 alert('Passwords do not match');
             } else {
                 delete data['confirm_password'];
+                $('#toBase64').attr('src', data.image);
+                // data.image = getBase64ImageById('toBase64');
+                console.log($('#file').prop('files'));
                 fetch('/req/reg', {
-                method: 'POST',
-                body: JSON.stringify(data),
-            }).then((response) => response.json())
-                .then((data) => console.log(data.status))
-                .catch((error) => console.log(error));
-        }
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                }).then((response) => response.json())
+                    .then((data) => console.log(data.status))
+                    .catch((error) => console.log(error));
             }
+        }
+        console.log(data);
     });
+
+function getBase64Image(img) {
+    // создаем канвас элемент
+    const canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // Копируем изображение на канвас
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    // Получаем data-URL отформатированную строку
+    // Firefox поддерживает PNG и JPEG.
+    const dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+function getBase64ImageById(id){
+   return getBase64Image(document.getElementById(id));
+}
