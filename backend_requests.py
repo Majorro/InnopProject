@@ -79,7 +79,7 @@ def req_reg_post():
     result['message'] = None
 
 
-    print(request.data)
+    #print(request.data)
 
     try:
         req = json.loads(request.data)
@@ -91,7 +91,6 @@ def req_reg_post():
     #print(req)
     req['sex'] = 'male'
     req['urls'] = {"facebook": "https://www.facebook.com/anton.naumtsev"}
-    req['image'] = 'test'
 
     req['admin_groups'] = []
     req['user_groups'] = []
@@ -118,12 +117,18 @@ def req_reg_post():
     account = dict()
     for i in params:
         account[i] = req[i]
+    print(account)
+    id = AccountsDB.insert(account)
 
-    AccountsDB.insert(account)
+
+    session['account_id'] = id
+    session['login'] = req['login']
+
 
     result['status'] = 'Ok'
     result['message'] = ''
     print('Зарегистрировался новый пользователь ' + account['login'])
+
     return jsonify(result)
 
 
