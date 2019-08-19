@@ -272,7 +272,7 @@ def req_send_eval_group_id(group_id):
 
     return jsonify(result)
 
-
+###
 
 @app.route("/req/get_my_posts/<group_id>", methods=['GET'])
 def req_get_posts_id(group_id):
