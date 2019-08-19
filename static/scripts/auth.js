@@ -35,15 +35,15 @@ $(document)
                 reader.onload = function(e){
                     const arrayBuffer = e.target.result;
                     data.image = arrayBuffer;
-                };
-                reader.readAsDataURL($('#file').prop('files')[0]);
-                console.log($('#file').prop('files')[0]);
-                fetch('/req/reg', {
+                    fetch('/req/reg', {
                     method: 'POST',
                     body: JSON.stringify(data),
                 }).then((response) => response.json())
                     .then((data) => console.log(data.status))
                     .catch((error) => console.log(error));
+                };
+                reader.readAsDataURL($('#file').prop('files')[0]);
+                console.log($('#file').prop('files')[0]);
             }
         }
         console.log(data);
