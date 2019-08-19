@@ -24,6 +24,7 @@ $(document)
                 body: JSON.stringify(data),
             }).then((response) => response.json())
                 .then((data) => {
+                console.log(data);
                     if(data.status === 'Ok') {
                         window.location.replace('/');
                     } else {
