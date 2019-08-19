@@ -78,6 +78,9 @@ def req_reg_post():
     result['status'] = None
     result['message'] = None
 
+
+    print(request.data)
+
     try:
         req = json.loads(request.data)
         if str(type(req)) != "<class 'dict'>":
@@ -135,7 +138,11 @@ def req_get_user_info_get():
         return error('User is not authorized')
 
     account = AccountsDB.get_by_login(session['login'])
-    return jsonify(account)
+
+    result['status'] = 'Ok'
+    result['message'] = ''
+    result['data'] = account
+    return jsonify(result)
 
 @app.route("/req/get_user_info/<id>", methods=['GET'])
 def req_get_user_info_id_get(id):
@@ -157,7 +164,10 @@ def req_get_user_info_id_get(id):
     if account is None:
         return error('Nonexistent id')
 
-    return jsonify(account)
+    result['status'] = 'Ok'
+    result['message'] = ''
+    result['data'] = account
+    return jsonify(result)
 
 
 @app.route("/req/get_group_info/<id>", methods=['GET'])
@@ -178,30 +188,11 @@ def req_get_group_info_id_get(id):
 
     if group is None:
         return error('Nonexistent id')
-    return jsonify(group)
 
-
-
-
-@app.route("/req/get_group_info/<id>", methods=['GET'])
-def req_get_group_info_id_get(id):
-    result = dict()
-    result['status'] = None
+    result['status'] = 'Ok'
     result['message'] = None
-
-    try:
-        id = int(id)
-    except:
-        return error('Wrong id')
-
-    if 'login' not in session:
-        return error('User is not authorized')
-
-    group = GroupsDB.get_by_id(id)
-
-    if group is None:
-        return error('Nonexistent id')
-    return jsonify(group)
+    result['data'] = group
+    return jsonify(result)
 
 
 @app.route("/req/get_recomendation/<group_id>", methods=['GET'])
@@ -218,16 +209,51 @@ def req_get_recomendation_group_id(group_id):
     if 'login' not in session:
         return error('User is not authorized')
 
-    group = GroupsDB.get_by_id(group_id)
+    user = get_user_id_in_group(session['account_id'], group_id)
 
+    if user is None:
+        return error('User is not member this group')
+
+    result['status'] = 'Ok'
+    result['message'] = ''
+    result['data'] = user['result_recommendation']
+    return jsonify(result)
+
+
+
+@app.route("/req/send_eval/<group_id>", methods=['GET'])
+def req_send_eval_group_id(group_id):
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+
+    try:
+        group_id = int(group_id)
+    except:
+        return error('Wrong group_id')
+
+
+
+    if 'login' not in session:
+        return error('User is not authorized')
+
+    group = GroupsDB.get_by_id(group_id)
     if group is None:
         return error('Nonexistent group_id')
 
-    for acc_id, user_id in group['members_id']:
-        if session['account_id'] == acc_id:
-            user = UsersDB.get_by_id(user_id)
-            if user is None:
-                continue
-            return jsonify(user['result_recommendation'])
+
+
+
+    req = json.loads(request.data)
+
+    params = ['author_id', 'appreciated_id', 'group_id', 'date', 'parameters', 'comment']
+    for par in params:
+        if par not in req:
+            return error('Missing attribute - ' + par)
+
 
     return error('User is not member this group')
+
+
+
+
