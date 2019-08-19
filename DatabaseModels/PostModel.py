@@ -109,6 +109,14 @@ class PostModel:
         cursor.close()
         self.connection.commit()
 
+    def get_all_by_group_id(self, group_id):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM posts WHERE group_id = ?", (str(group_id),))
+        rows = cursor.fetchall()
+        all = []
+        for w in rows:
+            all.append(postdata_to_json(w))
+        return all
 
 '''
 post = dict()

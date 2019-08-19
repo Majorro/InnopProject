@@ -272,4 +272,25 @@ def req_send_eval_group_id(group_id):
 
 
 
+@app.route("/req/get_posts/<group_id>", methods=['GET'])
+def req_get_posts_id(group_id):
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+
+    try:
+        group_id = int(group_id)
+    except:
+        return error('Wrong group_id')
+
+    if 'login' not in session:
+        return error('User is not authorized')
+
+    posts = PostsDB.get_all_by_group_id(group_id)
+
+    result['status'] = 'Ok'
+    result['message'] = ''
+    result['data'] = posts
+    return jsonify(result)
+
 
