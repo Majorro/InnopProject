@@ -11,7 +11,13 @@ def error(comment):
     return jsonify(result)
 
 
+@app.route('/error')
+@app.errorhandler(404)
+def not_found_page(error):
+    if 'login' not in session:
+        return redirect('/')
 
+    return '404',    404
 
 @app.route("/", methods=['GET'])
 def index_get():
@@ -34,8 +40,8 @@ def my_groups():
     return render_template('my_groups.html')
 
 
-@app.route("/del", methods=['GET'])
-def del_get():
+@app.route("/logout", methods=['GET'])
+def logout_get():
     global session
     session = {}
     return redirect('/')
