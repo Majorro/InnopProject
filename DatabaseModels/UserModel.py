@@ -9,7 +9,7 @@ def userdata_to_json(row):
     user = dict()
     user['user_id'] = user_id
     user['result_data'] = json.loads(result_data)
-    user['result_recommendation'] = result_recommendation
+    user['result_recommendation'] = json.loads(result_recommendation)
     user['posts'] = json.loads(posts)
     return user
 
@@ -23,7 +23,7 @@ class UserModel:
         cursor = self.connection.cursor()
         cursor.execute('''CREATE TABLE IF NOT EXISTS users (
                             user_id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                            result_recommendation TEXT,
+                            result_recommendation BLOB,
                             result_data BLOB,
                             posts BLOB
                         )''')
@@ -39,7 +39,7 @@ class UserModel:
                             posts) 
 
                 VALUES (?, ?, ?)''', (
-                user['result_recommendation'],
+                json.dumps(user['result_recommendation']),
                 json.dumps(user['result_data']),
                 json.dumps(user['posts'])
           ))
@@ -68,7 +68,7 @@ class UserModel:
                                         result_data='{}',
                                         posts='{}'
                                         WHERE user_id = ?'''.format(
-            user['result_recommendation'],
+            json.dumps(user['result_recommendation']),
             json.dumps(user['result_data']),
             json.dumps(user['posts']),
             (user['user_id'],)))
