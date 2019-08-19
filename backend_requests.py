@@ -155,6 +155,7 @@ def req_get_user_info_get():
     result['data'] = account
     return jsonify(result)
 
+
 @app.route("/req/get_user_info/<id>", methods=['GET'])
 def req_get_user_info_id_get(id):
     result = dict()
@@ -261,6 +262,8 @@ def req_send_eval_group_id(group_id):
     for par in params:
         if par not in req:
             return error('Missing attribute - ' + par)
+
+
 
 
     return error('User is not member this group')
