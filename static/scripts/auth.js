@@ -38,7 +38,7 @@ $(document)
             } else {
                 delete data['confirm_password'];
                 $('input[type="radio"]').map(function () {
-                    this.checked && (data.gender = this.value)
+                    this.checked && (data.sex = this.value)
                 });
                 const reader = new FileReader();
                 reader.onload = function (e) {
