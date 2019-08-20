@@ -50,6 +50,7 @@ def not_found_page(error):
 @app.route("/req/auth", methods=['POST'])
 def req_auth_post():
     req = json.loads(request.data)
+    print(req)
     result = dict()
     result['status'] = None
     result['message'] = None
@@ -361,4 +362,43 @@ def req_get_my_groups_get():
     result['status'] = 'Ok'
     result['message'] = ''
     result['data'] = groups
+    return jsonify(result)
+
+
+@app.route("/req/create_group", methods=['POST'])
+def req_create_group_post():
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+
+    if 'login' not in session:
+        return error('User is not authorized')
+
+    req = json.loads(request.data)
+    print(req)
+    params = ['groupname', 'groupimage']
+    gr = dict()
+    for par in params:
+        if par not in req:
+            return error('Missing attribute - ' + par)
+        gr[par] = req[par]
+
+    gr['admins_id'] = []
+    gr['members_id'] = []
+
+    group_id = GroupsDB.insert(gr)
+    add_account_to_group(session['account_id'], group_id)
+
+    group = GroupsDB.get_by_id(group_id)
+
+    user = UsersDB.get_one_by_group_id_and_account_id(group_id, session['account_id'])
+
+    group['admins_id'].append((session['account_id'], user['id_user']))
+    GroupsDB.update_group(group)
+
+    account = AccountsDB.get_by_id(session['account_id'])
+    account['admin_groups'].append(group_id)
+
+    result['status'] = 'Ok'
+    result['message'] = ''
     return jsonify(result)
