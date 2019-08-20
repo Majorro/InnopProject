@@ -22,7 +22,7 @@ def login_get():
     return render_template('auth.html')
 
 
-@app.route("/my_groups", methods=['GET'])
+@app.route("/mygroups", methods=['GET'])
 def my_groups():
     if 'login' not in session:
         return redirect('/login')
