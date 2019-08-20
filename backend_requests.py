@@ -331,7 +331,7 @@ def req_update_recommendations(group_id, account_id):
 
 
 
-@app.route("/req/get_my_groups/", methods=['GET'])
+@app.route("/req/get_my_groups", methods=['GET'])
 def req_get_my_groups_get():
     result = dict()
     result['status'] = None
