@@ -50,6 +50,7 @@ def not_found_page(error):
 @app.route("/req/auth", methods=['POST'])
 def req_auth_post():
     req = json.loads(request.data)
+    print(req)
     result = dict()
     result['status'] = None
     result['message'] = None
@@ -364,7 +365,6 @@ def req_get_my_groups_get():
     return jsonify(result)
 
 
-
 @app.route("/req/create_group", methods=['POST'])
 def req_create_group_post():
     result = dict()
@@ -375,7 +375,7 @@ def req_create_group_post():
         return error('User is not authorized')
 
     req = json.loads(request.data)
-
+    print(req)
     params = ['groupname', 'groupimage']
     gr = dict()
     for par in params:
