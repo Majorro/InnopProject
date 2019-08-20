@@ -301,7 +301,7 @@ def req_get_posts_id(group_id):
 
 
 
-@app.route("/req/update_recommendations/<group_id>/<account_id>", methods=['POST'])
+@app.route("/req/update_recommendations/<group_id>/<account_id>", methods=['GET'])
 def req_update_recommendations(group_id, account_id):
     result = dict()
     result['status'] = None
