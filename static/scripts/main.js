@@ -12,5 +12,5 @@ fetch('/req/get_user_info')
 \t\t                    Дата рождения: ${data.date}`);
         $('.text__description').text(data.person_description);
         (data.sex === 'female') && $('.sex__icon').removeClass('fa-mars').addClass('fa-venus');
-
+        $('#avatar').css('background-image', `url("${data.image}")`);
     });
