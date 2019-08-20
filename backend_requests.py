@@ -299,8 +299,6 @@ def req_get_posts_id(group_id):
 
 
 
-
-
 @app.route("/req/update_recommendations/<group_id>/<account_id>", methods=['GET'])
 def req_update_recommendations(group_id, account_id):
     result = dict()
@@ -329,4 +327,37 @@ def req_update_recommendations(group_id, account_id):
     result['status'] = 'Ok'
     result['message'] = ''
 
+    return jsonify(result)
+
+
+
+@app.route("/req/get_my_groups/", methods=['GET'])
+def req_get_my_groups_get():
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+
+    if 'login' not in session:
+        return error('User is not authorized')
+
+
+    account = AccountsDB.get_by_id(session['account_id'])
+
+    gr = dict()
+    groups = []
+
+    for group_id in account['user_groups']:
+        group = GroupsDB.get_by_id(group_id)
+        user = UsersDB.get_one_by_group_id_and_account_id(group_id, session['account_id'])
+
+        gr['group_id'] = group_id
+        gr['groupname'] = group['groupname']
+        gr['groupimage'] = group['groupimage']
+        gr['count_members'] = len(group['members_id'])
+        gr['count_recommendations'] = len(user['result_recommendation'])
+        groups.append(gr)
+
+    result['status'] = 'Ok'
+    result['message'] = ''
+    result['data'] = groups
     return jsonify(result)
