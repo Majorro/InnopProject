@@ -4,7 +4,6 @@ def update_user_recommendation(user, posts):
     # Редактирование result data, result_recomendation, posts - это оценкци пользователей
 
     # posts  [post1, post2, post3]
-
     # post:
     #     post_id - 4,
     #     author_id - 2,
@@ -17,14 +16,26 @@ def update_user_recommendation(user, posts):
     #           'par2': 2,
     #     }
 
+    parameters = dict()
+
+
     for post in posts:
-        post['parameters']['par1'] = 1
+        for key in post['parametrs']:
+            if key not in parameters:
+                parameters[key] = []
+
+            parameters[key].append(post['parametrs'][key])
 
 
-
+    parameters = {
+            'par1': [1, 2 , 3 ,4 ,5],
+            'par2': [1, 2, 3, 4, 5]
+    }
 
     user['result_data'] = result_data
-    user['result_recommendation'] = {'Стрессоустойчивость': 'Относитесь к вещам с улыбкой',
-     'Общение': 'поменьше мата в речи'}
+    user['result_recommendation'] = {
+        'Стрессоустойчивость': 'Относитесь к вещам с улыбкой',
+        'Общение': 'поменьше мата в речи'
+    }
 
     return user
