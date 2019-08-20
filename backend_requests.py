@@ -343,10 +343,11 @@ def req_get_my_groups_get():
 
     account = AccountsDB.get_by_id(session['account_id'])
 
-    gr = dict()
+
     groups = []
 
     for group_id in account['user_groups']:
+        gr = dict()
         group = GroupsDB.get_by_id(group_id)
         user = UsersDB.get_one_by_group_id_and_account_id(group_id, session['account_id'])
 
