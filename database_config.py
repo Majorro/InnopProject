@@ -37,3 +37,24 @@ def get_user_id_in_group(account_id, group_id):
             user = UsersDB.get_by_id(us_id)
             return int(us_id)
     return None
+
+def add_account_to_group(account_id, group_id):
+    group = GroupsDB.get_by_id(group_id)
+    if group is None:
+        return None
+
+    user = dict()
+    user['account_id'] = account_id
+    user['group_id'] = group_id
+    user['result_data'] = dict()
+    user['result_recommendation'] = dict()
+    user['posts'] = []
+
+    id_user = UsersDB.insert(user)
+
+    group['members_id'].append((account_id, id_user))
+    GroupsDB.update_group(group)
+
+    account = AccountsDB.get_by_id(account_id)
+    account['user_groups'].append(group_id)
+    return None
