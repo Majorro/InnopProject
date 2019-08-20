@@ -37,7 +37,9 @@ $(document)
                 alert('Passwords do not match');
             } else {
                 delete data['confirm_password'];
-                $('#toBase64').attr('src', data.image);
+                $('input[type="radio"]').map(function () {
+                    this.checked && (data.gender = this.value)
+                });
                 const reader = new FileReader();
                 reader.onload = function (e) {
                     const arrayBuffer = e.target.result;
