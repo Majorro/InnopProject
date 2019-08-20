@@ -27,12 +27,15 @@ def update_user_recommendation(user, posts):
             parameters[key].append(post['parametrs'][key])
 
 
+
     parameters = {
             'par1': [1, 2 , 3 ,4 ,5],
             'par2': [1, 2, 3, 4, 5]
     }
 
     user['result_data'] = result_data
+
+
     user['result_recommendation'] = {
         'Стрессоустойчивость': 'Относитесь к вещам с улыбкой',
         'Общение': 'поменьше мата в речи'
