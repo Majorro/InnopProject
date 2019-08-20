@@ -22,7 +22,7 @@ def login_get():
     return render_template('auth.html')
 
 
-@app.route("/my_groups", methods=['GET'])
+@app.route("/mygroups", methods=['GET'])
 def my_groups():
     if 'login' not in session:
         return redirect('/login')
@@ -36,14 +36,13 @@ def logout_get():
     session = {}
     return redirect('/')
 
+
 @app.route('/error')
 @app.errorhandler(404)
 def not_found_page(error):
     if 'login' not in session:
         return redirect('/')
-
     return '404',    404
-
 
 ###  API
 
@@ -94,7 +93,6 @@ def req_reg_post():
         return error('Unknown error')
 
     #print(req)
-    req['sex'] = 'male'
     req['urls'] = {"facebook": "https://www.facebook.com/anton.naumtsev"}
 
     req['admin_groups'] = []
@@ -332,7 +330,6 @@ def req_update_recommendations(group_id, account_id):
 
     return jsonify(result)
 
-#
 # @app.route("/req/create_group", methods=['GET'])
 # def req_update_recommendations(group_id, account_id):
 #     result = dict()

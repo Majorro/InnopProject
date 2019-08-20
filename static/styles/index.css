@@ -1,7 +1,8 @@
 * {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
-    color: white;
+  font-family: myriad-pro, sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    color:white;
 }
 
 a {
@@ -16,7 +17,7 @@ div, p{
 body
 {
     margin: 0;
-    background-color: rgb(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .bg_image
@@ -53,17 +54,16 @@ body
 .top_bar_button
 {
     color: white;
-    margin: 0 20px;
-    padding: 5px;
+    padding: 10px 20px;
     flex: 1;
     vertical-align:middle;
     background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
     text-align:center;
 
+
     font-family: myriad-pro, sans-serif;
     white-space: nowrap;
-
     font-style: normal;
     font-weight: 100;
     font-size: 20px;
@@ -72,12 +72,12 @@ body
 
 .top_bar_button:hover
 {
-    background-color: rgb(105, 105, 105, 0.5);
+    background-color: rgba(105, 105, 105, 0.5);
 }
 
 .top_bar_button:active
 {
-    background-color: rgb(173, 173, 173, 0.5);
+    background-color: rgba(173, 173, 173, 0.5);
     transition: 0s;
 }
 /* top_bar end */
@@ -214,7 +214,7 @@ fa-telegram-plane:active, fa-vk:active, fa-instagram:active, fa-reddit-alien:act
 }
 
 
-.text__descriprion{
+.text__description{
     width: 350px;
     font-family: myriad-pro, sans-serif;
     white-space:pre-wrap;

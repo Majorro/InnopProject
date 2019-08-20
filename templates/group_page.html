@@ -25,7 +25,7 @@
 
         <!-- main_view -->
         <div id="main_view">
-        <!-- sidebar -->
+            <!-- sidebar -->
             <div id="side_bar">
                 <div id="group_info">
                     <img class="group_logo_img" src="../static/images/doka_logo.png" alt="Group Logo">
@@ -33,8 +33,8 @@
                     <span class="group_members_counter">Участников: 228</span>
                 </div>
                 <div class="group_members">
-                    <div class="line sidebar_line"></div>
-                    <div class="member">
+                    <div id=top_sidebar_line class="line"></div>
+                    <div class="member" onclick="changeEvalWinState()">
                         <img class="member_avatar_img" src="../static/images/more_fashion_avatar.jpg" alt="Member Avatar">
                         <div class="member_info">
                             <div class="member_group_status">
@@ -43,7 +43,7 @@
                             <span class="member_fullname">Андрей<br>Балконский</span>
                         </div>
                     </div>
-                    <div class="member">
+                    <div class="member" onclick="changeEvalWinState()">
                         <img class="member_avatar_img" src="../static/images/more_fashion_avatar.jpg" alt="Member Avatar">
                         <div class="member_info">
                             <div class="member_group_status">
@@ -53,7 +53,7 @@
                             <span class="member_fullname">Андрей<br>Балконский</span>
                         </div>
                     </div>
-                    <div class="member">
+                    <div class="member" onclick="changeEvalWinState()">
                         <img class="member_avatar_img" src="../static/images/more_fashion_avatar.jpg" alt="Member Avatar">
                         <div class="member_info">
                             <div class="member_group_status">
@@ -62,7 +62,7 @@
                             <span class="member_fullname">Андрей<br>Балконский</span>
                         </div>
                     </div>
-                    <div class="member last_member">
+                    <div class="member" onclick="changeEvalWinState()">
                         <img class="member_avatar_img" src="../static/images/more_fashion_avatar.jpg" alt="Member Avatar">
                         <div class="member_info">
                             <div class="member_group_status">
@@ -71,16 +71,23 @@
                             <span class="member_fullname">Андрей<br>Балконский</span>
                         </div>
                     </div>
-                    <div class="line sidebar_line"></div>
+                    <div id="bottom_sidebar_line" class="line"></div>
                 </div>
             </div>
-        <!-- sidebar end -->
-
-        <!-- viewport -->
+            <!-- sidebar end -->
+            <!-- par, joi, res, kin, tru, irr, com, iso
+                 patnership, joint, responsibility, kindness, trust, irritability, compliance, isolation-->
+            <!-- eval_window -->
+            <div id="eval_window">
+                <a href="javascript:void(0)" id="eval_window_close_button" onclick="changeEvalWinState()"><i class="fas fa-times"></i></a>
+            </div>
+            <!-- eval_window -->
+        
+            <!-- viewport -->
             <div id="viewport">
                 <h1 id="viewport_title">Рекомендации</h1>
                 <div class="line viewport_title_line"></div>
-                <div id="recommendations_holder">
+                <div id="recommendation_container">
                     <div class="recommendation_panel">
                         <h2 class="recommendation_title">Title</h2>
                         <div class="line recommendation_panel_line"></div>
@@ -158,10 +165,21 @@
                             Lorem ipsum choto tam
                             Lorem ipsum choto tam
                         </p>
+                    </div>
+                    <div class="recommendation_panel">
+                            <h2 class="recommendation_title">Title</h2>
+                            <div class="line recommendation_panel_line"></div>
+                            <p class="recommendation">
+                                Lorem ipsum choto tam
+                                Lorem ipsum choto tam
+                                Lorem ipsum choto tam
+                                Lorem ipsum choto tam
+                                Lorem ipsum choto tam
+                            </p>
                     </div>
                 </div>
             </div>
-        <!-- viewport end -->
+            <!-- viewport end -->
         </div>
         <!-- main_view end -->
         <script src="../static/scripts/group_page.js" ></script>
