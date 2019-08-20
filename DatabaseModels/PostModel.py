@@ -69,7 +69,7 @@ class PostModel:
         cursor.close()
         self.connection.commit()
         return id
-
+#
     def get_by_id(self, post_id):
         cursor = self.connection.cursor()
         cursor.execute("SELECT * FROM posts WHERE post_id = ?", (str(post_id),))
