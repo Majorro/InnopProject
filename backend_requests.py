@@ -120,6 +120,7 @@ def req_reg_post():
     account = dict()
     for i in params:
         account[i] = req[i]
+
     print(account)
     id = AccountsDB.insert(account)
 
@@ -146,10 +147,11 @@ def req_get_user_info_get():
         return error('User is not authorized')
 
     account = AccountsDB.get_by_login(session['login'])
-
+    account['date'] = '.'.join(reversed(account['date'].split('-')))
     result['status'] = 'Ok'
     result['message'] = ''
     result['data'] = account
+
     return jsonify(result)
 
 
@@ -328,37 +330,3 @@ def req_update_recommendations(group_id, account_id):
     result['message'] = ''
 
     return jsonify(result)
-
-
-# @app.route("/req/create_group", methods=['GET'])
-# def req_update_recommendations(group_id, account_id):
-#     result = dict()
-#     result['status'] = None
-#     result['message'] = None
-#
-#     try:
-#         group_id = int(group_id)
-#         account_id = int(account_id)
-#     except:
-#         return error('Wrong one of ids')
-#
-#     user = UsersDB.get_one_by_group_id_and_account_id(group_id, account_id)
-#
-#     all_posts = []
-#
-#     for id_post in user['posts']:
-#         post = PostsDB.get_by_id(id_post)
-#         all_posts.append(post)
-#
-#     from assessment_functions import update_user_recommendation
-#     new_user = update_user_recommendation(user, all_posts)
-#
-#     UsersDB.update_user(new_user)
-#
-#     result['status'] = 'Ok'
-#     result['message'] = ''
-#
-#     return jsonify(result)
-
-
-
