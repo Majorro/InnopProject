@@ -60,6 +60,7 @@ body
     background-color: rgba(0, 0, 0, 0);
     cursor: pointer;
     text-align:center;
+    outline: none;
 
 
     font-family: myriad-pro, sans-serif;
