@@ -455,3 +455,58 @@ def req_add_user_to_group_post(group_id):
     result['status'] = 'Ok'
     result['message'] = ''
     return jsonify(result)
+
+
+
+
+@app.route("/req/get_info_about_users_in_group/<group_id>", methods=['GET'])
+def req_get_info_about_users_in_group_post(group_id):
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+
+    try:
+        group_id = int(group_id)
+    except:
+        return error('Group_id is not integer')
+
+    if 'login' not in session:
+        return error('User is not authorized')
+
+
+    req = json.loads(request.data)
+
+    flag = False
+    group = GroupsDB.get_by_id(group_id)
+
+    for account_id, user_id in group['members_id']:
+        if account_id == session['account_id']:
+            flag = True
+
+    if not flag:
+        return error('Вы не член данной группы')
+
+    accounts_data = []
+
+    for account_id, user_id in group['members_id']:
+        account = AccountsDB.get_by_id(account_id)
+        data = dict()
+        data['account_id'] = account_id
+        data['first_name'] = account['first_name']
+        data['last_name'] = account['last_name']
+        data['login'] = account['login']
+        data['image'] = account['image']
+        data['is_admin'] = False
+
+        for acc_id, us_id in group['admins_id']:
+            if data['account_id'] == acc_id:
+                data['is_admin'] = True
+
+        accounts_data.append(data)
+
+    result['data'] = accounts_data
+    result['status'] = 'Ok'
+    result['message'] = ''
+
+    return jsonify(result)
+
