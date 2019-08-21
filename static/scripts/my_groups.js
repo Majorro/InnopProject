@@ -6,6 +6,7 @@ fetch('/get_my_groups')
            $('#main_view').append(`
            <div class="group">
                 <img class="group_logo_img" src="${group.groupimage}" alt="Group Logo">
+                <input type="hidden" class="groupId" value="${group.group_id}">
                 <div class="group_info">
                     <h2 class="group_name">${group.groupname}</h2>
                     <span class="group_members_counter">Участников: ${group.count_members}</span><br>
@@ -15,3 +16,8 @@ fetch('/get_my_groups')
            `);
         });
     });
+
+$(document).on('click', '.group', function () {
+   const url = '/' + $(this).children('.groupId').val();
+   window.location.replace(url);
+});
