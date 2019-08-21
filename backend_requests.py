@@ -514,3 +514,37 @@ def req_get_info_about_users_in_group_post(group_id):
 
     return jsonify(result)
 
+
+
+@app.route("/group/", methods=['GET'])
+def req_get_group():
+    if 'login' not in session:
+        return redirect('/')
+
+    try:
+        group_id = int(request.args.get('group_id', None))
+    except:
+        return redirect('/mygroups')
+
+
+
+    account = AccountsDB.get_by_id(session['account_id'])
+    flag = False
+    for gr_id in account['user_groups']:
+        if gr_id == group_id:
+            flag = True
+
+    if not flag:
+        return redirect('/mygroups')
+
+
+    return render_template('group_page.html')
+
+
+
+@app.route("/adminpage", methods=['GET'])
+def req_adminpage():
+    if 'login' not in session:
+        return redirect('/')
+
+    return render_template('adminpage.html')
