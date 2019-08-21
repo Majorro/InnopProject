@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="https://simeydotme.github.io/jQuery-ui-Slider-Pips/dist/css/jquery-ui-slider-pips.min.css">
         <!-- <link rel="stylesheet" href="https://simeydotme.github.io/jQuery-ui-Slider-Pips/dist/css/app.min.css"> -->
         <!-- CUSTOM SLIDERS END -->
-        <link href="../static/styles/group_page.css" rel="stylesheet">
+      
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
         <!-- CUSTOM SLIDERS -->
@@ -17,6 +17,7 @@
         <script src="https://simeydotme.github.io/jQuery-ui-Slider-Pips/dist/js/jquery-ui-slider-pips.js"></script>
         <!-- CUSTOM SLIDERS END -->
         <script src="https://kit.fontawesome.com/6a4be30845.js"></script>
+          <link href="../static/styles/group_page.css" rel="stylesheet">
     </head>
     
     <body>
@@ -26,12 +27,15 @@
         
         <!-- top_bar -->
         <div id="top_bar">
-            <button id="main_page_button" class="top_bar_button">Главная</button>
-            <button class="top_bar_button">Приглашения</button>
-            <button class="top_bar_button">Группы</button>
-            <button class="top_bar_button">Админ page</button>
+            <div class="left_pad"></div>
+            <a href="/" class="top_bar_button">Главная</a>
+            <a href="/mygroups" class="top_bar_button">Группы</a>
+            <a href="/adminpage" class="top_bar_button">Админ панель</a>
+            <a href="/logout" class="top_bar_button">Выйти</a>
+            <div class="right_pad"></div>
         </div>
         <!-- end -->
+
 
         <!-- main_view -->
         <div id="main_view">

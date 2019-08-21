@@ -223,13 +223,16 @@ def req_get_recomendation_group_id(group_id):
     if 'login' not in session:
         return error('User is not authorized')
 
-    user = get_user_id_in_group(session['account_id'], group_id)
+    user = UsersDB.get_one_by_group_id_and_account_id(group_id, session['account_id'])
 
     if user is None:
         return error('User is not member this group')
 
     result['status'] = 'Ok'
     result['message'] = ''
+    print(result)
+    print(user)
+    print(user['result_recommendation'])
     result['data'] = user['result_recommendation']
     return jsonify(result)
 
@@ -478,8 +481,6 @@ def req_get_info_about_users_in_group_post(group_id):
         return error('User is not authorized')
 
 
-    req = json.loads(request.data)
-
     flag = False
     group = GroupsDB.get_by_id(group_id)
 
@@ -488,7 +489,7 @@ def req_get_info_about_users_in_group_post(group_id):
             flag = True
 
     if not flag:
-        return error('Вы не член данной группы')
+        return error('Вы не являетесь участником данной группы')
 
     accounts_data = []
 
@@ -516,13 +517,13 @@ def req_get_info_about_users_in_group_post(group_id):
 
 
 
-@app.route("/group/", methods=['GET'])
-def req_get_group():
+@app.route("/group/<group_id>", methods=['GET'])
+def req_get_group(group_id):
     if 'login' not in session:
         return redirect('/')
 
     try:
-        group_id = int(request.args.get('id', None))
+        group_id = int(group_id)
     except:
         return redirect('/mygroups')
 

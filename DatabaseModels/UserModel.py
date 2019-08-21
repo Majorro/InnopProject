@@ -60,7 +60,7 @@ class UserModel:
 
     def get_by_id(self, user_id):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE id_user = ?", (str(user_id),))
+        cursor.execute("SELECT * FROM users WHERE user_id = ?", (str(user_id),))
         rows = cursor.fetchone()
         if not rows:
             return None

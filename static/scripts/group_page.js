@@ -128,20 +128,16 @@ function closeEvalWin() {
     console.log("closed");
 }
 
-let groupIdSearch = window.location.search;
+let groupIdSearch = window.location.pathname;
 let groupId = '';
-for (let i = 4; i < groupIdSearch.length; i++) {
+for (let i = 6; i < groupIdSearch.length; i++) {
     groupId += groupIdSearch[i];
 }
-
 function dateNow()
 {
     const date = new Date();
     return [date.getDate(), date.getMonth()+1, date.getFullYear()].join('.');
 }
-
-let groupId = window.location.pathname;
-let membersId;
 
 fetch(`/req/get_group_info${groupId}`)
     .then((response) => response.json())
@@ -157,15 +153,16 @@ fetch(`/req/get_info_about_users_in_group${groupId}`)
     .then((response) => response.json())
     .then((response) => {
         const data = response.data;
+        console.log(data);
         const admin = '<i class="fas fa-cog"></i>';
         data.map((user) => {
             $('.group_members').append(`
                     <div class="member">
-                        <img class="member_avatar_img" src="${data.image}" alt="Member Avatar">
+                        <img class="member_avatar_img" src="${user.image}" alt="Member Avatar">
                         <div class="member_info">
                             <div class="member_group_status">
                                 <i class="far fa-user"></i>
-                                ${data.is_admin && admin}
+                                ${data.is_admin ? admin : ''}
                             </div>
                             <span class="member_fullname">${user.first_name}<br>${user.last_name}</span>
                         </div>

@@ -81,21 +81,8 @@ body
     background-color: rgba(173, 173, 173, 0.5);
     transition: 0s;
 }
-/* top_bar end */
 
-/* main_view */
-#main_view
-{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
 
-#left_panel
-{
-    flex-basis: 35%;
-    margin: 0 0 0 0;
-}
 
 .left_pad{
     flex: 1;
@@ -104,6 +91,16 @@ body
 
 .right_pad{
     flex: 1;
+}
+/* top_bar end */
+
+
+/* main_view */
+#main_view
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
 
