@@ -402,3 +402,56 @@ def req_create_group_post():
     result['status'] = 'Ok'
     result['message'] = ''
     return jsonify(result)
+
+
+@app.route("/req/add_user_to_group/<group_id>", methods=['POST'])
+def req_add_user_to_group_post(group_id):
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+
+    try:
+        group_id = int(group_id)
+    except:
+        return error('group_id is not integer')
+
+    if 'login' not in session:
+        return error('User is not authorized')
+
+
+    req = json.loads(request.data)
+
+    params = ['login']
+    for par in params:
+        if par not in req:
+            return error('Missing attribute - ' + par)
+
+    flag = False
+    group = GroupsDB.get_by_id(group_id)
+
+    for account_id, user_id in group['admins_id']:
+        if account_id == session['account_id']:
+            flag = True
+
+    if not flag:
+        return error('Вы не администратор группы')
+
+
+    flag = False
+    for account_id, user_model in group['members_id']:
+        if req['account_id'] == account_id:
+            flag = True
+
+    if flag:
+        return error('Данный пользователь уже состоит в данной группе')
+
+
+    account = AccountsDB.get_by_id(req['account_id'])
+    if account is None:
+        return error('Приглашённого пользователя не существует')
+
+    add_account_to_group(req['account_id'], group_id)
+
+    result['status'] = 'Ok'
+    result['message'] = ''
+    return jsonify(result)
