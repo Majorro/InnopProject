@@ -3,9 +3,19 @@
     <head>
         <meta charset="utf-8">
         <title>*group_name*</title>
+        <!-- CUSTOM SLIDERS -->
+        <link rel="stylesheet" href="https://simeydotme.github.io/jQuery-ui-Slider-Pips/dist/css/jqueryui.min.css">
+        <link rel="stylesheet" href="https://simeydotme.github.io/jQuery-ui-Slider-Pips/dist/css/jquery-ui-slider-pips.min.css">
+        <!-- <link rel="stylesheet" href="https://simeydotme.github.io/jQuery-ui-Slider-Pips/dist/css/app.min.css"> -->
+        <!-- CUSTOM SLIDERS END -->
         <link href="../static/styles/group_page.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+        <!-- CUSTOM SLIDERS -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+        <script src="https://simeydotme.github.io/jQuery-ui-Slider-Pips/dist/js/jquery-plus-ui.min.js"></script>
+        <script src="https://simeydotme.github.io/jQuery-ui-Slider-Pips/dist/js/jquery-ui-slider-pips.js"></script>
+        <!-- CUSTOM SLIDERS END -->
         <script src="https://kit.fontawesome.com/6a4be30845.js"></script>
     </head>
     
@@ -76,10 +86,51 @@
             </div>
             <!-- sidebar end -->
             <!-- par, joi, res, kin, tru, irr, com, iso
-                 patnership, joint, responsibility, kindness, trust, irritability, compliance, isolation-->
+                 partnership, joint, responsibility, kindness, trust, irritability, compliance, isolation-->
             <!-- eval_window -->
             <div id="eval_window">
+                <div class="slider_container">
+                    <div class="slider par"></div> <!-- CUSTOM SLIDER -->
+                    <div class="slider_title">partnership</div>
+                    <p class="slider_val">1</p>
+                </div>
+                <div class="slider_container">
+                    <div class="slider joi"></div> <!-- CUSTOM SLIDER -->
+                    <div class="slider_title">joint</div>
+                    <p class="slider_val">1</p>
+                </div>
+                <div class="slider_container">
+                    <div class="slider res"></div> <!-- CUSTOM SLIDER -->
+                    <div class="slider_title">responsibility</div>
+                    <p class="slider_val">1</p>
+                </div>
+                <div class="slider_container">
+                    <div class="slider kin"></div> <!-- CUSTOM SLIDER -->
+                    <div class="slider_title">kindness</div>
+                    <p class="slider_val">1</p>
+                </div>
+                <div class="slider_container">
+                    <div class="slider tru"></div> <!-- CUSTOM SLIDER -->
+                    <div class="slider_title">trust</div>
+                    <p class="slider_val">1</p>
+                </div>
+                <div class="slider_container">
+                    <div class="slider irr"></div> <!-- CUSTOM SLIDER -->
+                    <div class="slider_title">irritability</div>
+                    <p class="slider_val">1</p>
+                </div>
+                <div class="slider_container">
+                    <div class="slider com"></div> <!-- CUSTOM SLIDER -->
+                    <div class="slider_title">compliance</div>
+                    <p class="slider_val">1</p>
+                </div>
+                <div class="slider_container">
+                    <div class="slider iso"></div> <!-- CUSTOM SLIDER -->
+                    <div class="slider_title">isolation</div>
+                    <p class="slider_val">1</p>
+                </div>
                 <a href="javascript:void(0)" id="eval_window_close_button" onclick="changeEvalWinState()"><i class="fas fa-times"></i></a>
+                <button id="send_eval_button">Сохранить</button>
             </div>
             <!-- eval_window -->
         
@@ -165,17 +216,6 @@
                             Lorem ipsum choto tam
                             Lorem ipsum choto tam
                         </p>
-                    </div>
-                    <div class="recommendation_panel">
-                            <h2 class="recommendation_title">Title</h2>
-                            <div class="line recommendation_panel_line"></div>
-                            <p class="recommendation">
-                                Lorem ipsum choto tam
-                                Lorem ipsum choto tam
-                                Lorem ipsum choto tam
-                                Lorem ipsum choto tam
-                                Lorem ipsum choto tam
-                            </p>
                     </div>
                 </div>
             </div>
