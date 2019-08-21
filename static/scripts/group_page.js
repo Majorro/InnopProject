@@ -88,8 +88,11 @@ function closeEvalWin() {
     console.log("closed");
 }
 
-let groupId = window.location.pathname;
-let membersId;
+let groupIdSearch = window.location.search;
+let groupId = '';
+for (let i = 4; i < groupIdSearch.length; i++) {
+    groupId += groupIdSearch[i];
+}
 
 fetch(`/req/get_group_info${groupId}`)
     .then((response) => response.json())
