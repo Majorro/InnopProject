@@ -58,6 +58,7 @@ body
 
 .top_bar_button:hover
 {
+    z-index: 2;
     background-color: rgb(105, 105, 105, 0.5);
 }
 
@@ -208,6 +209,11 @@ body
     font-size: 13px;
     line-height: 18px;
 }
+
+.opened_member
+{
+    background-color: rgb(173, 173, 173, 0.5) !important;
+}
 /* sidebar end */
 
 /* eval_window */
@@ -315,7 +321,6 @@ body
     bottom: 14vh;
 
     font-size: 0;
-    /* transition: 0.5s; */
 }
 
 #send_eval_button:hover
