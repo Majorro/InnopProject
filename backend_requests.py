@@ -201,6 +201,8 @@ def req_get_group_info_id_get(id):
     if group is None:
         return error('Nonexistent id')
 
+    group['members_counter'] = len(group['members_id'])
+
     result['status'] = 'Ok'
     result['message'] = None
     result['data'] = group
@@ -351,7 +353,7 @@ def req_get_my_groups_get():
         gr = dict()
         group = GroupsDB.get_by_id(group_id)
         user = UsersDB.get_one_by_group_id_and_account_id(group_id, session['account_id'])
-
+        print(user)
         gr['group_id'] = group_id
         gr['groupname'] = group['groupname']
         gr['groupimage'] = group['groupimage']
@@ -362,6 +364,8 @@ def req_get_my_groups_get():
     result['status'] = 'Ok'
     result['message'] = ''
     result['data'] = groups
+
+    print(groups)
     return jsonify(result)
 
 
