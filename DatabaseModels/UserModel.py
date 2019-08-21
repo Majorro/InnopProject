@@ -4,12 +4,14 @@ def userdata_to_json(row):
     if row is None:
         return None
 
-    user_id, result_data,  result_recommendation, posts = row
+    user_id, account_id, group_id, result_data,  result_recommendation, posts = row
 
     user = dict()
     user['user_id'] = user_id
+    user['account_id'] = account_id
+    user['group_id'] = group_id
     user['result_data'] = json.loads(result_data)
-    user['result_recommendation'] = result_recommendation
+    user['result_recommendation'] = json.loads(result_recommendation)
     user['posts'] = json.loads(posts)
     return user
 
@@ -23,7 +25,9 @@ class UserModel:
         cursor = self.connection.cursor()
         cursor.execute('''CREATE TABLE IF NOT EXISTS users (
                             user_id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                            result_recommendation TEXT,
+                            account_id INTEGER,
+                            group_id INTEGER,
+                            result_recommendation BLOB,
                             result_data BLOB,
                             posts BLOB
                         )''')
@@ -34,12 +38,16 @@ class UserModel:
     def insert(self, user):
         cursor = self.connection.cursor()
         cursor.execute('''INSERT INTO users ( 
+                            account_id,
+                            group_id,
                             result_recommendation,
                             result_data,
                             posts) 
 
-                VALUES (?, ?, ?)''', (
-                user['result_recommendation'],
+                VALUES (?, ?, ?, ?, ?)''', (
+                user['account_id'],
+                user['group_id'],
+                json.dumps(user['result_recommendation']),
                 json.dumps(user['result_data']),
                 json.dumps(user['posts'])
           ))
@@ -64,11 +72,15 @@ class UserModel:
     def update_user(self, user):
         cursor = self.connection.cursor()
         cursor.execute('''UPDATE users SET  
+                                        account_id = '{}',
+                                        group_id = '{}',
                                         result_recommendation = '{}',
                                         result_data='{}',
                                         posts='{}'
                                         WHERE user_id = ?'''.format(
-            user['result_recommendation'],
+            user['account_id'],
+            user['group_id'],
+            json.dumps(user['result_recommendation']),
             json.dumps(user['result_data']),
             json.dumps(user['posts']),
             (user['user_id'],)))
@@ -82,6 +94,13 @@ class UserModel:
         cursor.execute('''DELETE FROM users WHERE user_id = ?''', (str(user_id),))
         cursor.close()
         self.connection.commit()
+
+    def get_one_by_group_id_and_account_id(self, group_id, account_id):
+        cursor = self.connection.cursor()
+        cursor.execute("SELECT * FROM users WHERE group_id = ? AND account_id = ?",
+                       (str(group_id), str(account_id)))
+        row = cursor.fetchone()
+        return userdata_to_json(row)
 
 
 
