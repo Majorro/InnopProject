@@ -55,7 +55,7 @@ class PostModel:
                             parameters, 
                             comment) 
 
-                VALUES (?, ?, ?, ?)''', (
+                VALUES (?, ?, ?, ?, ?, ?)''', (
                 post['author_id'],
                 post['appreciated_id'],
                 post['group_id'],

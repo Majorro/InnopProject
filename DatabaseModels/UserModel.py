@@ -4,7 +4,7 @@ def userdata_to_json(row):
     if row is None:
         return None
 
-    user_id, account_id, group_id, result_data,  result_recommendation, posts = row
+    user_id, account_id, group_id, result_recommendation, result_data, posts = row
 
     user = dict()
     user['user_id'] = user_id

@@ -50,7 +50,6 @@ def not_found_page(error):
 @app.route("/req/auth", methods=['POST'])
 def req_auth_post():
     req = json.loads(request.data)
-    print(req)
     result = dict()
     result['status'] = None
     result['message'] = None
@@ -122,7 +121,6 @@ def req_reg_post():
     for i in params:
         account[i] = req[i]
 
-    print(account)
     id = AccountsDB.insert(account)
 
 
@@ -227,18 +225,16 @@ def req_get_recomendation_group_id(group_id):
 
     if user is None:
         return error('User is not member this group')
-
+    print('user', user)
     result['status'] = 'Ok'
     result['message'] = ''
-    print(result)
-    print(user)
     print(user['result_recommendation'])
     result['data'] = user['result_recommendation']
     return jsonify(result)
 
 
 #
-@app.route("/req/send_eval/<group_id>", methods=['GET'])
+@app.route("/req/send_eval/<group_id>", methods=['POST'])
 def req_send_eval_group_id(group_id):
     result = dict()
     result['status'] = None
@@ -258,14 +254,20 @@ def req_send_eval_group_id(group_id):
         return error('Nonexistent group_id')
 
 
+
     req = json.loads(request.data)
     req['group_id'] = group_id
+    req['author_id'] = session['account_id']
 
-    params = ['author_id', 'appreciated_id', 'group_id', 'date', 'parameters', 'comment']
+    params = ['appreciated_id', 'group_id', 'date', 'parameters', 'comment']
+    print(req)
+
 
     for par in params:
         if par not in req:
             return error('Missing attribute - ' + par)
+    print('РОБИТ')
+
 
     post_id = PostsDB.insert(req)
     user = UsersDB.get_one_by_group_id_and_account_id(group_id, req['appreciated_id'])
@@ -275,7 +277,6 @@ def req_send_eval_group_id(group_id):
 
     result['status'] = 'Ok'
     result['message'] = ''
-
     return jsonify(result)
 
 ###
@@ -356,7 +357,6 @@ def req_get_my_groups_get():
         gr = dict()
         group = GroupsDB.get_by_id(group_id)
         user = UsersDB.get_one_by_group_id_and_account_id(group_id, session['account_id'])
-        print(user)
         gr['group_id'] = group_id
         gr['groupname'] = group['groupname']
         gr['groupimage'] = group['groupimage']
@@ -368,7 +368,6 @@ def req_get_my_groups_get():
     result['message'] = ''
     result['data'] = groups
 
-    print(groups)
     return jsonify(result)
 
 
@@ -382,7 +381,6 @@ def req_create_group_post():
         return error('User is not authorized')
 
     req = json.loads(request.data)
-    print(req)
     params = ['groupname', 'groupimage']
     gr = dict()
     for par in params:

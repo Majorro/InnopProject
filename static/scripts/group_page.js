@@ -39,7 +39,7 @@ let userEvaluations = {
     "iso": 1
 }
 
-$(".slider").on("slide", function(event, ui)
+$(document).on("click", ".slider", function(event, ui)
 {
     let evalValue = ui.value;
     let evalParameterName = $(this).attr("class").split(" ")[1];
@@ -47,28 +47,28 @@ $(".slider").on("slide", function(event, ui)
     userEvaluations[evalParameterName] = evalValue;
 });
 
-$(".member").on("click", function()
+$(document).on('click', '.member', function()
 {
     $(this).addClass("opened_member").siblings().removeClass("opened_member");
     changeEvalWinState(this);
     lastObj = this;
 })
 
-$("#eval_window_close_button").on("click", function()
+$(document).on("click", "#eval_window_close_button", function()
 {
     changeEvalWinState();
 })
 
 const send_eval_params = {
-    "apppreciated_id": 1,
+    "appreciated_id": 1,
     "group_id": 1,
     "date": dateNow(),
     "parameters": userEvaluations,
     "comment": ""
 };
-$("#send_eval_button").on("click", function()
+$(document).on("click", "#send_eval_button", function()
 {
-    fetch("/req/send_eval/1",
+    fetch(`/req/send_eval${groupId}`,
     {
         method: "post",
         body: JSON.stringify(send_eval_params),
@@ -162,7 +162,7 @@ fetch(`/req/get_info_about_users_in_group${groupId}`)
                         <div class="member_info">
                             <div class="member_group_status">
                                 <i class="far fa-user"></i>
-                                ${data.is_admin ? admin : ''}
+                                ${user.is_admin ? admin : ''}
                             </div>
                             <span class="member_fullname">${user.first_name}<br>${user.last_name}</span>
                         </div>
@@ -176,7 +176,7 @@ fetch(`/req/get_info_about_users_in_group${groupId}`)
 fetch(`/req/get_my_recommendations${groupId}`)
     .then((response) => response.json())
     .then((response) => {
-        const data = response.result_data;
+        const data = response.data;
         data.map((recommendation) => {
             $('#recommendation_container').append(`
             <div class="recommendation_panel">
