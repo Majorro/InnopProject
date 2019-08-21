@@ -527,7 +527,6 @@ def req_get_group():
         return redirect('/mygroups')
 
 
-
     account = AccountsDB.get_by_id(session['account_id'])
     flag = False
     for gr_id in account['user_groups']:

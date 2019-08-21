@@ -18,6 +18,6 @@ fetch('/req/get_my_groups')
     });
 
 $(document).on('click', '.group', function () {
-   const url = '/group/?group_id=' + $(this).children('.groupId').val();
+   const url = '/group/?id=' + $(this).children('.groupId').val();
    window.location.replace(url);
 });
