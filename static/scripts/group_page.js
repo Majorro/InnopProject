@@ -22,6 +22,7 @@ $(".slider")
 // CUSTOM SLIDERS END
 
 let evalWinState = false; //false - closed, true - opened
+let lastObj = null;
 //let topBarState = true;
 //let evaluationWindow = document.getElementById("eval_window");
 //let sliderElements = document.getElementsByClassName("slider");
@@ -46,14 +47,53 @@ $(".slider").on("slide", function(event, ui)
     userEvaluations[evalParameterName] = evalValue;
 });
 
-function changeEvalWinState()
+$(".member").on("click", function()
 {
-    if(evalWinState)
+    $(this).addClass("opened_member").siblings().removeClass("opened_member");
+    changeEvalWinState(this);
+    lastObj = this;
+})
+
+$("#eval_window_close_button").on("click", function()
+{
+    changeEvalWinState();
+})
+
+const send_eval_params = {
+    "apppreciated_id": 1,
+    "group_id": 1,
+    "date": dateNow(),
+    "parameters": userEvaluations,
+    "comment": ""
+};
+$("#send_eval_button").on("click", function()
+{
+    fetch("/req/send_eval/1",
+    {
+        method: "post",
+        body: JSON.stringify(send_eval_params),
+    })
+    .then(json)
+    .then(function (data)
+    {  
+        console.log('Request succeeded with JSON response', data);  
+    })  
+    .catch(function (error)
+    {  
+        console.log('Request failed', error);  
+    });
+})
+
+function changeEvalWinState(changedObj = null)
+{
+    if(evalWinState && changedObj == null)
     {
         closeEvalWin();
+        $(lastObj).removeClass("opened_member");
         evalWinState = false;
+        lastObj = null;
     }
-    else 
+    else if(lastObj == null)
     {
         openEvalWin();
         evalWinState = true;
@@ -68,11 +108,9 @@ function openEvalWin()
         $('.slider_container').each(function()
         {
             this.style.display = "flex";
-            // this.style.height = "60vh";
         });
+        document.getElementById("send_eval_button").style.fontSize = "24px";
     }, 175);
-    document.getElementById("send_eval_button").style.fontSize = "24px";
-    // document.getElementById("send_eval_button").style.height = "initial";
     document.getElementsByClassName("fa-times")[0].style.fontSize = "initial";
     console.log("opened");
 }
@@ -85,11 +123,15 @@ function closeEvalWin()
         $('.slider_container').each(function()
         {
             this.style.display = "none";
-            // this.style.height = "0";
         });
+        document.getElementById("send_eval_button").style.fontSize = "0";
     }, 100);
-    document.getElementById("send_eval_button").style.fontSize = "0";
-    // document.getElementById("send_eval_button").style.height = "0";
     document.getElementsByClassName("fa-times")[0].style.fontSize = "0";
     console.log("closed");
+}
+
+function dateNow()
+{
+    const date = new Date();
+    return [date.getDate(), date.getMonth()+1, date.getFullYear()].join('.');
 }
