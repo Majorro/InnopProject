@@ -81,6 +81,17 @@ body
     background-color: rgba(173, 173, 173, 0.5);
     transition: 0s;
 }
+
+
+
+.left_pad{
+    flex: 1;
+}
+
+
+.right_pad{
+    flex: 1;
+}
 /* top_bar end */
 
 

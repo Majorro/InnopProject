@@ -540,3 +540,11 @@ def req_get_group():
 
     return render_template('group_page.html')
 
+
+
+@app.route("/adminpage", methods=['GET'])
+def req_adminpage():
+    if 'login' not in session:
+        return redirect('/')
+
+    return render_template('adminpage.html')
