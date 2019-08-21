@@ -1,4 +1,4 @@
-fetch('/get_my_groups/')
+fetch('/req/get_my_groups')
     .then((response) => response.json())
     .then((response) => {
         const data = response.data;
