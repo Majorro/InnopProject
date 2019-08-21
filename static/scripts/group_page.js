@@ -39,7 +39,7 @@ let userEvaluations = {
     "iso": 1
 }
 
-$(document).on("click", ".slider", function(event, ui)
+$(document).on("slide", ".slider", function(event, ui)
 {
     let evalValue = ui.value;
     let evalParameterName = $(this).attr("class").split(" ")[1];
