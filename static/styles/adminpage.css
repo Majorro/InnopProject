@@ -1,0 +1,222 @@
+* {
+  font-family: myriad-pro, sans-serif;
+    font-style: normal;
+    font-weight: 100;
+    color:white;
+}
+
+a {
+  text-decoration: none
+}
+
+div, p{
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.bg_image
+{
+    /* IT WORKS DONT TOUCH */
+    background:
+    linear-gradient(
+          rgba(0, 0, 0, 0.5),
+          rgba(0, 0, 0, 0.5)
+        ),
+    url("../images/more_fashion_avatar.jpg");
+    /* IT WORKS DONT TOUCH */
+    height: 100vh;
+    width: 100vw;
+    z-index: -1;
+    position: fixed;
+    filter: blur(25px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* top_bar */
+#top_bar
+{
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    justify-content: space-between;
+}
+
+
+.top_bar_button
+{
+    color: white;
+    padding: 10px 20px;
+    flex: 1;
+    vertical-align:middle;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    text-align:center;
+    outline: none;
+
+
+    font-family: myriad-pro, sans-serif;
+    white-space: nowrap;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+
+.top_bar_button:hover
+{
+    background-color: rgba(105, 105, 105, 0.5);
+}
+
+.top_bar_button:active
+{
+    background-color: rgba(173, 173, 173, 0.5);
+    transition: 0s;
+}
+
+
+
+.left_pad{
+    flex: 1;
+}
+
+
+.right_pad{
+    flex: 1;
+}
+/* top_bar end */
+
+
+
+
+
+
+.block__content{
+    display: inline-block;
+    height: 100%;
+    position: absolute;
+    left: 50%;
+    transform:translateX(-50%);
+}
+
+
+
+.my__groups{
+    width: 840px;
+    display: flex;
+    display: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+
+.one__group{
+
+      width:100%;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      margin-top: 25px;
+}
+
+.group_padding{
+    padding: 0 15px;
+
+}
+
+.content__group{
+    padding: 15px;
+    background:
+        linear-gradient(
+          rgba(255, 255, 255, 0.2), 
+          rgba(255, 255, 255, 0.2)
+        );
+}
+
+
+.top__data{
+    display: flex;
+
+}
+
+.group__image{
+    display: inline-block;
+    background-image: url("../images/more_fashion_avatar.jpg");
+    
+    /* background-position: center;
+    overflow: hidden; */
+    /* either ^ or v */
+    background-size: cover;
+    
+    margin-right: 4vw;
+    height: 80px;
+    width: 80px;
+}
+
+.group__image{
+    display: inline-block;
+    background-image: url("../images/more_fashion_avatar.jpg");
+    
+    /* background-position: center;
+    overflow: hidden; */
+    /* either ^ or v */
+    background-size: cover;
+    
+    margin-right: 4vw;
+    height: 80px;
+    width: 80px;
+}
+
+
+.group__name{
+    font-size: 20px;
+    font-weight: 600;
+
+}
+
+
+.botton__data{
+    display: flex;
+
+}
+
+.my__button{
+    margin-right: 25px;
+    white-space: nowrap;
+}
+
+.my__button:last-child{
+    margin-right: 0px;
+}
+
+.text__administration{
+    margin-top: 15px;
+    font-size: 25px;
+
+}
+
+.plus__image{
+    width: 80px;
+    height: 80px;
+    padding-bottom:25px;    
+        background:
+        linear-gradient(
+          rgba(0, 0, 0, 0.2), 
+          rgba(0, 0, 0, 0.2)
+        );
+}
+
+.plus{
+    text-align: center;
+    font-size: 75px;
+    font-weight: 700;
+    opacity: 0.3;
+}
