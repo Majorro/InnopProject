@@ -522,7 +522,7 @@ def req_get_group():
         return redirect('/')
 
     try:
-        group_id = int(request.args.get('group_id', None))
+        group_id = int(request.args.get('id', None))
     except:
         return redirect('/mygroups')
 
