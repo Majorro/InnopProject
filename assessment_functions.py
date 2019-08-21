@@ -35,10 +35,9 @@ def update_user_recommendation(user, posts):
 
     user['result_data'] = result_data
 
+    data1 = {'title': 'Стрессоустойчивость', 'text': 'Относитесь к вещам с улыбкой'}
+    user['result_recommendation'] = [
+        data1]
 
-    user['result_recommendation'] = {
-        'Стрессоустойчивость': 'Относитесь к вещам с улыбкой',
-        'Общение': 'поменьше мата в речи'
-    }
 
     return user
