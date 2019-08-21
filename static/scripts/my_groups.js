@@ -1,4 +1,4 @@
-fetch('/get_my_groups')
+fetch('/req/get_my_groups')
     .then((response) => response.json())
     .then((response) => {
         const data = response.data;
@@ -18,6 +18,6 @@ fetch('/get_my_groups')
     });
 
 $(document).on('click', '.group', function () {
-   const url = '/' + $(this).children('.groupId').val();
+   const url = '/group/?group_id=' + $(this).children('.groupId').val();
    window.location.replace(url);
 });
