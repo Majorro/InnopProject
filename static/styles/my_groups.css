@@ -134,26 +134,3 @@ h1
     font-size: 16px;
 }
 /* main_view end */
-
-
-
-.one__group{
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-}
-
-
-#avatar
-{
-    background-image: url("../images/more_fashion_avatar.jpg");
-    
-    /* background-position: center;
-    overflow: hidden; */
-    /* either ^ or v */
-    background-size: cover;
-    
-    margin-right: 4vw;
-    height: 50vh;
-    width: 50vh;
-}
