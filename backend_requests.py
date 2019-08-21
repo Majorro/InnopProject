@@ -534,11 +534,9 @@ def req_get_group(group_id):
 
     if not flag:
         return redirect('/mygroups')
-
-
     return render_template('group_page.html')
 
-
+#
 
 @app.route("/adminpage", methods=['GET'])
 def req_adminpage():
