@@ -128,6 +128,11 @@ function closeEvalWin() {
     console.log("closed");
 }
 
+let groupIdSearch = window.location.search;
+let groupId = '';
+for (let i = 4; i < groupIdSearch.length; i++) {
+    groupId += groupIdSearch[i];
+}
 
 function dateNow()
 {
@@ -155,7 +160,7 @@ fetch(`/req/get_info_about_users_in_group${groupId}`)
         const admin = '<i class="fas fa-cog"></i>';
         data.map((user) => {
             $('.group_members').append(`
-                    <div class="member" onclick="changeEvalWinState()">
+                    <div class="member">
                         <img class="member_avatar_img" src="${data.image}" alt="Member Avatar">
                         <div class="member_info">
                             <div class="member_group_status">
@@ -167,6 +172,7 @@ fetch(`/req/get_info_about_users_in_group${groupId}`)
                     </div>
             `);
         });
+        $('.group_members').append('<div id="bottom_sidebar_line" class="line"></div>');
     })
     .catch((error) => console.log(error));
 
