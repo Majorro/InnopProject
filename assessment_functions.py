@@ -40,4 +40,10 @@ def update_user_recommendation(user, posts):
         data1]
 
 
+    one_recomend = dict()
+    one_recomend['title'] = 'Доброта'
+    one_recomend['text'] = 'Анализируйте свои действия!'
+
+    recs = [one_recomend]
+    
     return user

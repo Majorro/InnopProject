@@ -256,21 +256,21 @@ def req_send_eval_group_id(group_id):
 
 
     req = json.loads(request.data)
+
     req['group_id'] = group_id
     req['author_id'] = session['account_id']
 
     params = ['appreciated_id', 'group_id', 'date', 'parameters', 'comment']
-    print(req)
 
 
     for par in params:
         if par not in req:
             return error('Missing attribute - ' + par)
-    print('РОБИТ')
-
 
     post_id = PostsDB.insert(req)
     user = UsersDB.get_one_by_group_id_and_account_id(group_id, req['appreciated_id'])
+    print('POST = ', req)
+
     user['posts'].append(post_id)
 
     UsersDB.update_user(user)
