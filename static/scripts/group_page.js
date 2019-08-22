@@ -134,6 +134,7 @@ fetch(`/req/get_group_info${groupId}`)
     .then((response) => response.json())
     .then((response) => {
         const data = response.data;
+        $('title').text(data.groupname);
         $('.group_name').text(data.groupname);
         $('.group_members_counter').text(`Участников: ${data.members_counter}`);
         $('.group_logo_img').attr('src', data.groupimage);
