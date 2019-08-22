@@ -85,16 +85,15 @@ $(document).on("click", "#send_eval_button", function () {
         .catch(function (error) {
             console.log('Request failed', error);
         });
-    changeEvalWinState();
-});
+})
 
 function changeEvalWinState(changedObj = null) {
-    if (evalWinState && changedObj === null) {
+    if (evalWinState && changedObj == null) {
         closeEvalWin();
         $(lastObj).removeClass("opened_member");
         evalWinState = false;
         lastObj = null;
-    } else if (lastObj === null) {
+    } else if (lastObj == null) {
         openEvalWin();
         evalWinState = true;
     }
