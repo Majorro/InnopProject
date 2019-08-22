@@ -349,13 +349,11 @@ def req_get_my_groups_get():
 
 
     groups = []
-    print('ACCOUNT = ', account)
     for group_id in account['user_groups']:
         gr = dict()
         group = GroupsDB.get_by_id(group_id)
         user = UsersDB.get_one_by_group_id_and_account_id(group_id, session['account_id'])
 
-        print(user)
         gr['group_id'] = group_id
         gr['groupname'] = group['groupname']
         gr['groupimage'] = group['groupimage']
@@ -380,7 +378,6 @@ def req_create_group_post():
         return error('User is not authorized')
 
     req = json.loads(request.data)
-    print(req)
     params = ['groupname', 'groupimage']
     gr = dict()
     for par in params:
@@ -392,7 +389,6 @@ def req_create_group_post():
     gr['members_id'] = []
 
     group_id = GroupsDB.insert(gr)
-    print(group_id)
     add_account_to_group(session['account_id'], group_id)
 
     group = GroupsDB.get_by_id(group_id)
@@ -421,12 +417,13 @@ def req_add_user_to_group_post(group_id):
     except:
         return error('group_id is not integer')
 
+
     if 'login' not in session:
         return error('User is not authorized')
 
 
     req = json.loads(request.data)
-
+    print(req)
     params = ['login']
     for par in params:
         if par not in req:
@@ -443,19 +440,22 @@ def req_add_user_to_group_post(group_id):
     if not flag:
         return error('Вы не администратор группы')
 
+    account = AccountsDB.get_by_login(req['login'])
+    if account is None:
+        return error('Приглашённого пользователя не существует')
+
+
 
     flag = False
     for account_id, user_model in group['members_id']:
-        if req['account_id'] == account_id:
+        if account['account_id'] == account_id:
             flag = True
 
     if flag:
         return error('Данный пользователь уже состоит в данной группе')
 
 
-    account = AccountsDB.get_by_login(req['login'])
-    if account is None:
-        return error('Приглашённого пользователя не существует')
+
 
     add_account_to_group(account['account_id'], group_id)
 

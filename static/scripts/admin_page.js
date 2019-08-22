@@ -2,6 +2,8 @@ let groupForm = $("#new_group_form")[0];
 let memberForm = $("#new_member_form")[0];
 let newGroupName;
 let newGroupAvatar;
+let gId;
+let url;
 
 $(document).on("click", ".plus__image", function()
 {
@@ -75,10 +77,10 @@ $(document).on('submit', '#new_group_form', function (e)
         };
     }
 });
-
 $(document).on("click", "#add_user_button", function()
 {
     memberForm.style.top = "15vh";
+    gId = $(this).siblings("#groupId").val();
 });
 
 $(document).on('submit', '#new_member_form', function (e)
@@ -88,11 +90,11 @@ $(document).on('submit', '#new_member_form', function (e)
     $(this).find('input').each(function () {
         newMemberData[this.name] = $(this).val();
     });
-    login = newMemberData.login;
+    login = {login: newMemberData.login}
     if(login != "")
     {
         memberForm.style.top = "-50vh";
-        fetch(`/req/add_user_to_group/${$(this).siblings("#groupId")[0]}`,
+        fetch(`/req/add_user_to_group/${gId}`,
         {
             method: "POST",
             body: JSON.stringify(login),
@@ -111,15 +113,14 @@ fetch("/req/get_my_groups")
         let groups = data.data;
         groups.map((groupData) =>
         {
-            $(".my__groups")[0].prepend(
-                `<div class="one__group">
+            const watch = '/group/' + groupData.group_id;
+            $(".my__groups").prepend(`
+            <div class="one__group">
                     <div class="group_padding">
                         <div class="content__group">
                             <div class="top__data">
                                 <div class="left__panel">
-                                    <div class="group__image" style="background-image: url("${groupData.groupimage}");">
-                                    
-                                    </div>
+                                    <img class="group__image" src="${groupData.groupimage}>
                                 </div>
 
                                 <div class="right__panel">
@@ -143,13 +144,12 @@ fetch("/req/get_my_groups")
                                     <input type="hidden" id="groupId" value="${groupData.group_id}">
                                     <a href="#" class="my__button">Удалить</a>
                                     <a href="#" class="my__button" id="add_user_button">Добавить пользователя</a>
-                                    <a href="#" class="my__button">Просмотр</a>
-
+                                    <a href=${watch} class="my__button watch">Просмотр</a>
                             </div>
                         </div>
                     </div>
-                </div>`
-            )
+                </div>
+                `)
         });
     })
     .catch((error) => console.log(error))

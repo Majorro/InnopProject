@@ -162,12 +162,12 @@ body
 .group__image{
     display: inline-block;
     background-image: url("../images/more_fashion_avatar.jpg");
-    
+
     /* background-position: center;
     overflow: hidden; */
     /* either ^ or v */
     background-size: cover;
-    
+
     margin-right: 4vw;
     height: 80px;
     width: 80px;
