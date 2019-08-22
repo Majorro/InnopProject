@@ -432,6 +432,7 @@ def req_add_user_to_group_post(group_id):
         if par not in req:
             return error('Missing attribute - ' + par)
 
+
     flag = False
     group = GroupsDB.get_by_id(group_id)
 
@@ -452,11 +453,11 @@ def req_add_user_to_group_post(group_id):
         return error('Данный пользователь уже состоит в данной группе')
 
 
-    account = AccountsDB.get_by_id(req['account_id'])
+    account = AccountsDB.get_by_login(req['login'])
     if account is None:
         return error('Приглашённого пользователя не существует')
 
-    add_account_to_group(req['account_id'], group_id)
+    add_account_to_group(account['account_id'], group_id)
 
     result['status'] = 'Ok'
     result['message'] = ''
