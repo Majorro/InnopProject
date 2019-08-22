@@ -82,8 +82,6 @@ body
     transition: 0s;
 }
 
-
-
 .left_pad{
     flex: 1;
 }
@@ -193,6 +191,8 @@ body
     white-space: nowrap;
 }
 
+
+
 .my__button:last-child{
     margin-right: 0px;
 }
@@ -207,12 +207,28 @@ body
     width: 80px;
     height: 80px;
     padding-bottom:25px;    
-    background:
-        linear-gradient(
-            rgba(0, 0, 0, 0.2), 
-            rgba(0, 0, 0, 0.2)
-        );
+    background-color: rgb(0, 0, 0, 0.2);
     cursor: pointer;
+}
+
+.top_bar_button:hover
+{
+    background-color: rgba(105, 105, 105, 0.5);
+}
+
+.top_bar_button:active
+{
+    background-color: rgba(173, 173, 173, 0.5);
+    transition: 0s;
+}
+
+.plus__image:hover {
+    background-color: rgba(105, 105, 105, 0.5);
+}
+
+.plus__image:active {
+    background-color: rgba(173, 173, 173, 0.5);
+    transition: 0s;
 }
 
 .plus{
