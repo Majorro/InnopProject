@@ -380,6 +380,7 @@ def req_create_group_post():
         return error('User is not authorized')
 
     req = json.loads(request.data)
+    print(req)
     params = ['groupname', 'groupimage']
     gr = dict()
     for par in params:
@@ -391,13 +392,14 @@ def req_create_group_post():
     gr['members_id'] = []
 
     group_id = GroupsDB.insert(gr)
+    print(group_id)
     add_account_to_group(session['account_id'], group_id)
 
     group = GroupsDB.get_by_id(group_id)
 
     user = UsersDB.get_one_by_group_id_and_account_id(group_id, session['account_id'])
 
-    group['admins_id'].append((session['account_id'], user['id_user']))
+    group['admins_id'].append((session['account_id'], user['user_id']))
     GroupsDB.update_group(group)
 
     account = AccountsDB.get_by_id(session['account_id'])
@@ -545,4 +547,4 @@ def req_adminpage():
     if 'login' not in session:
         return redirect('/')
 
-    return render_template('adminpage.html')
+    return render_template('admin_page.html')

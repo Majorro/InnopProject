@@ -57,4 +57,5 @@ def add_account_to_group(account_id, group_id):
 
     account = AccountsDB.get_by_id(account_id)
     account['user_groups'].append(group_id)
+    AccountsDB.update_account(account)
     return None

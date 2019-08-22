@@ -16,20 +16,20 @@ $(document).on('submit', 'form', function (e)
     });
     if(newGroupData["groupname"] != "" && newGroupData["groupimage"] != "")
     {
-        groupForm.style.top = "-50vh";
-        let reader = new FileReader();
-        reader.readAsDataURL($('#group_image_form').prop('files')[0]);
-        reader.onload = function (e) {
-            const arrayBuffer = e.target.result;
-            newGroupData.groupimage = arrayBuffer;
-        };
+    groupForm.style.top = "-50vh";
+    let reader = new FileReader();
+    reader.readAsDataURL($('#group_image_form').prop('files')[0]);
+    reader.onload = function (e) {
+        const arrayBuffer = e.target.result;
+        newGroupData.groupimage = arrayBuffer;
         fetch("/req/create_group",
-        {
-            method: "POST",
-            body: JSON.stringify(newGroupData),
-        })
-        .then((response) => response.json())
-        .then((data) => console.log(data))
-        .catch((error) => console.log(error));
+    {
+        method: "POST",
+        body: JSON.stringify(newGroupData),
+    })
+    .then((response) => response.json())
+    .then((data) => console.log(data))
+    .catch((error) => console.log(error));
+    };
     }
-});
+    });
