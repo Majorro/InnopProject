@@ -262,7 +262,7 @@ def req_send_eval_group_id(group_id):
 
     params = ['appreciated_id', 'group_id', 'date', 'parameters', 'comment']
 
-
+#
     for par in params:
         if par not in req:
             return error('Missing attribute - ' + par)
