@@ -159,20 +159,6 @@ body
     width: 80px;
 }
 
-.group__image{
-    display: inline-block;
-    background-image: url("../images/more_fashion_avatar.jpg");
-    
-    /* background-position: center;
-    overflow: hidden; */
-    /* either ^ or v */
-    background-size: cover;
-    
-    margin-right: 4vw;
-    height: 80px;
-    width: 80px;
-}
-
 
 .group__name{
     font-size: 20px;
@@ -312,3 +298,66 @@ body
     transition: 0s;
 }
 /* new_group_form end */
+
+
+#new_member_form {
+    opacity: 1;
+    z-index: 1;
+    transition: 0.5s;
+
+    position: fixed;
+    top: -50vh;
+    left: 30vw;
+    width: 40vw;
+    height: 50vh;
+
+    text-align: center;
+    background-color:rgba(0, 0, 0, 0.8);
+}
+
+#new_login_inputs {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+#new_login_title {
+    margin: 5vh 0 0 5vw;
+}
+
+#new_login {
+    color: black;
+    width: 30vw;
+    margin: 1vh 0 3vh 5vw;
+}
+
+#new_login_saver {
+    margin-top: 4vh;
+    color: white;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0);
+    border: 0;
+    cursor: pointer;
+    text-align:center;
+    outline: none;
+    align-self: center;
+    position: relative;
+
+    font-family: myriad-pro, sans-serif;
+    white-space: nowrap;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+#new_group_saver:hover
+{
+    background-color: rgba(105, 105, 105, 0.5);
+}
+
+#new_group_saver:active
+{
+    background-color: rgba(173, 173, 173, 0.5);
+    transition: 0s;
+}

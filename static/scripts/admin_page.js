@@ -1,4 +1,7 @@
 let groupForm = $("#new_group_form")[0];
+let memberForm = $("#new_member_form")[0];
+let newGroupName;
+let newGroupAvatar;
 
 $(document).on("click", ".plus__image", function()
 {
@@ -7,10 +10,11 @@ $(document).on("click", ".plus__image", function()
     groupForm.style.top = "15vh";
 });
 
-$(document).on('submit', 'form', function (e)
+
+$(document).on('submit', '#new_group_form', function (e)
 {
     e.preventDefault();
-    const newGroupData = {};
+    let newGroupData = {};
     $(this).find('input').each(function () {
         newGroupData[this.name] = $(this).val();
     });
@@ -22,14 +26,130 @@ $(document).on('submit', 'form', function (e)
         reader.onload = function (e) {
             const arrayBuffer = e.target.result;
             newGroupData.groupimage = arrayBuffer;
+            // $("#last_elem").before(
+            //     `<div class="one__group">
+            //         <div class="group_padding">
+            //             <div class="content__group">
+            //                 <div class="top__data">
+            //                     <div class="left__panel">
+            //                         <div class="group__image" style="background-image: url("${newGroupData.groupimage}");">
+                                    
+            //                         </div>
+            //                     </div>
+
+            //                     <div class="right__panel">
+            //                         <div class="group__name">
+            //                             ${newGroupData.groupname}
+            //                         </div>
+
+            //                         <div class="count__members">
+            //                             Участников: 0
+            //                         </div>
+
+            //                         <div class="count__recommendations">
+            //                             Рекомендаций: 0
+            //                         </div>
+            //                     </div>
+            //                 </div>
+
+
+
+            //                 <div class="botton__data">
+            //                         <a href="#" class="my__button">Удалить</a>
+            //                         <a href="#" class="my__button" id="add_user_button">Добавить пользователя</a>
+            //                         <a href="#" class="my__button">Просмотр</a>
+
+            //                 </div>
+            //             </div>
+            //         </div>
+            //     </div>`
+            // )
+            fetch("/req/create_group",
+            {
+                method: "POST",
+                body: JSON.stringify(newGroupData),
+            })
+            .then((response) => response.json())
+            .then((data) => console.log(data))
+            .catch((error) => console.log(error));
         };
-        fetch("/req/create_group",
+    }
+});
+
+$(document).on("click", "#add_user_button", function()
+{
+    memberForm.style.top = "15vh";
+});
+
+$(document).on('submit', '#new_member_form', function (e)
+{
+    e.preventDefault();
+    let newMemberData = {};
+    $(this).find('input').each(function () {
+        newMemberData[this.name] = $(this).val();
+    });
+    login = newMemberData.login;
+    if(login != "")
+    {
+        memberForm.style.top = "-50vh";
+        fetch(`/req/add_user_to_group/${$(this).siblings("#groupId")[0]}`,
         {
             method: "POST",
-            body: JSON.stringify(newGroupData),
+            body: JSON.stringify(login),
         })
         .then((response) => response.json())
         .then((data) => console.log(data))
         .catch((error) => console.log(error));
     }
 });
+
+
+fetch("/req/get_my_groups")
+    .then((response) => response.json())
+    .then((data) => 
+    {
+        let groups = data.data;
+        groups.map((groupData) =>
+        {
+            $(".my__groups")[0].prepend(
+                `<div class="one__group">
+                    <div class="group_padding">
+                        <div class="content__group">
+                            <div class="top__data">
+                                <div class="left__panel">
+                                    <div class="group__image" style="background-image: url("${groupData.groupimage}");">
+                                    
+                                    </div>
+                                </div>
+
+                                <div class="right__panel">
+                                    <div class="group__name">
+                                        ${groupData.groupname}
+                                    </div>
+
+                                    <div class="count__members">
+                                        Участников: ${groupData.count_members}
+                                    </div>
+
+                                    <div class="count__recommendations">
+                                        Рекомендаций: ${groupData.count_recommendations}
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="botton__data">
+                                    <input type="hidden" id="groupId" value="${groupData.group_id}">
+                                    <a href="#" class="my__button">Удалить</a>
+                                    <a href="#" class="my__button" id="add_user_button">Добавить пользователя</a>
+                                    <a href="#" class="my__button">Просмотр</a>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+            )
+        });
+    })
+    .catch((error) => console.log(error))
