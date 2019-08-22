@@ -193,8 +193,10 @@ body
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: space-evenly;
-    padding: 1vh 1vw;
+    /* padding: 1vh 1vw; */
+    padding: 1vh 0;
     cursor: pointer;
+    width: 100%;
 }
 
 .member:hover
@@ -256,7 +258,7 @@ body
     flex-wrap: nowrap;
 
     height: 100%;
-    left: 13.7vw;
+    left: 13.5vw;
     width: 0;
     position: fixed;
     z-index: 1;
@@ -347,7 +349,8 @@ body
     outline: none;
     text-align: center;
     position: absolute;
-    right: 37vw;
+    /* right: 37vw; */
+    align-self: center;
     bottom: 14vh;
 
     font-size: 0;

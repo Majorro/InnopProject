@@ -14,14 +14,14 @@ $(document).on('submit', 'form', function (e)
     $(this).find('input').each(function () {
         newGroupData[this.name] = $(this).val();
     });
-    if(newGroupData["groupName"] != "" && newGroupData["groupAvatar"] != "")
+    if(newGroupData["groupname"] != "" && newGroupData["groupimage"] != "")
     {
         groupForm.style.top = "-50vh";
         let reader = new FileReader();
         reader.readAsDataURL($('#group_image_form').prop('files')[0]);
         reader.onload = function (e) {
             const arrayBuffer = e.target.result;
-            newGroupData.groupAvatar = arrayBuffer;
+            newGroupData.groupimage = arrayBuffer;
         };
         fetch("/req/create_group",
         {

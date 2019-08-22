@@ -101,7 +101,7 @@ function changeEvalWinState(changedObj = null) {
 }
 
 function openEvalWin() {
-    document.getElementById("eval_window").style.width = "86.3vw";
+    document.getElementById("eval_window").style.width = "86.5vw";
     document.body.style.overflow = "hidden";
     setTimeout(() => {
         $('.slider_container').each(function () {
