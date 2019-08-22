@@ -1,5 +1,11 @@
 // CUSTOM SLIDERS
-$.extend( $.ui.slider.prototype.options, { 
+let groupIdSearch = window.location.pathname;
+let groupId = '';
+for (let i = 6; i < groupIdSearch.length; i++) {
+    groupId += groupIdSearch[i];
+}
+
+$.extend($.ui.slider.prototype.options, {
     animate: 300
 });
 
@@ -10,7 +16,8 @@ $(".slider")
         range: "min",
         value: 1,
         orientation: "vertical",
-        slide: function( event, ui ) {},
+        slide: function (event, ui) {
+        },
     });
 
 $(".slider")
@@ -37,64 +44,57 @@ let userEvaluations = {
     "irr": 1,
     "com": 1,
     "iso": 1
-}
+};
 
-$(document).on("slide", ".slider", function(event, ui)
-{
+$(document).on("slide", ".slider", function (event, ui) {
     let evalValue = ui.value;
     let evalParameterName = $(this).attr("class").split(" ")[1];
     $(this).siblings("p").text(evalValue);
     userEvaluations[evalParameterName] = evalValue;
 });
-
-$(document).on('click', '.member', function()
-{
-    $(this).addClass("opened_member").siblings().removeClass("opened_member");
-    changeEvalWinState(this);
-    lastObj = this;
-})
-
-$(document).on("click", "#eval_window_close_button", function()
-{
-    changeEvalWinState();
-})
-
 const send_eval_params = {
-    "appreciated_id": 1,
-    "group_id": 1,
+    "appreciated_id": '',
+    "group_id": groupId,
     "date": dateNow(),
     "parameters": userEvaluations,
     "comment": ""
 };
-$(document).on("click", "#send_eval_button", function()
-{
-    fetch(`/req/send_eval${groupId}`,
-    {
-        method: "post",
-        body: JSON.stringify(send_eval_params),
-    })
-    .then(json)
-    .then(function (data)
-    {  
-        console.log('Request succeeded with JSON response', data);  
-    })  
-    .catch(function (error)
-    {  
-        console.log('Request failed', error);  
-    });
-})
 
-function changeEvalWinState(changedObj = null)
-{
-    if(evalWinState && changedObj == null)
-    {
+$(document).on('click', '.member', function () {
+    $(this).addClass("opened_member").siblings().removeClass("opened_member");
+    changeEvalWinState(this);
+    lastObj = this;
+    const uId = $(this).children('.uId').val();
+    send_eval_params.appreciated_id = uId;
+});
+
+$(document).on("click", "#eval_window_close_button", function () {
+    changeEvalWinState();
+});
+
+$(document).on("click", "#send_eval_button", function () {
+    fetch(`/req/send_eval${groupId}`,
+        {
+            method: "post",
+            body: JSON.stringify(send_eval_params),
+        })
+        .then((response) => response.json())
+        .then(function (data) {
+            console.log('Request succeeded with JSON response', data);
+        })
+        .catch(function (error) {
+            console.log('Request failed', error);
+        });
+    changeEvalWinState();
+});
+
+function changeEvalWinState(changedObj = null) {
+    if (evalWinState && changedObj === null) {
         closeEvalWin();
         $(lastObj).removeClass("opened_member");
         evalWinState = false;
         lastObj = null;
-    }
-    else if(lastObj == null)
-    {
+    } else if (lastObj === null) {
         openEvalWin();
         evalWinState = true;
     }
@@ -104,8 +104,7 @@ function openEvalWin() {
     document.getElementById("eval_window").style.width = "86.3vw";
     document.body.style.overflow = "hidden";
     setTimeout(() => {
-        $('.slider_container').each(function()
-        {
+        $('.slider_container').each(function () {
             this.style.display = "flex";
         });
         document.getElementById("send_eval_button").style.fontSize = "24px";
@@ -118,8 +117,7 @@ function closeEvalWin() {
     document.getElementById("eval_window").style.width = "0";
     document.body.style.overflow = "initial";
     setTimeout(() => {
-        $('.slider_container').each(function()
-        {
+        $('.slider_container').each(function () {
             this.style.display = "none";
         });
         document.getElementById("send_eval_button").style.fontSize = "0";
@@ -128,15 +126,9 @@ function closeEvalWin() {
     console.log("closed");
 }
 
-let groupIdSearch = window.location.pathname;
-let groupId = '';
-for (let i = 6; i < groupIdSearch.length; i++) {
-    groupId += groupIdSearch[i];
-}
-function dateNow()
-{
+function dateNow() {
     const date = new Date();
-    return [date.getDate(), date.getMonth()+1, date.getFullYear()].join('.');
+    return [date.getDate(), date.getMonth() + 1, date.getFullYear()].join('.');
 }
 
 fetch(`/req/get_group_info${groupId}`)
@@ -158,6 +150,7 @@ fetch(`/req/get_info_about_users_in_group${groupId}`)
         data.map((user) => {
             $('.group_members').append(`
                     <div class="member">
+                        <input type="hidden" class="uId" value="${user.account_id}">
                         <img class="member_avatar_img" src="${user.image}" alt="Member Avatar">
                         <div class="member_info">
                             <div class="member_group_status">
