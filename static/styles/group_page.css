@@ -391,12 +391,13 @@ body
 
 .recommendation_panel
 {
-    background-color: rgb(72, 66, 60);
+    background-color: rgb(72, 66, 60, 0.8);
     border-radius: 10px;
     padding: 0.5vh 1vw;
     margin: 0 2vw 2vw 0;
     height: 36vh;
     width: 23.7vw;
+
 }
 
 .recommendation_title

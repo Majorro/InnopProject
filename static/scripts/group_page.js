@@ -85,6 +85,7 @@ $(document).on("click", "#send_eval_button", function () {
         .catch(function (error) {
             console.log('Request failed', error);
         });
+        changeEvalWinState();
 })
 
 function changeEvalWinState(changedObj = null) {
