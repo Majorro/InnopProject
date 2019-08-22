@@ -137,6 +137,11 @@ fetch(`/req/get_group_info${groupId}`)
         $('.group_name').text(data.groupname);
         $('.group_members_counter').text(`Участников: ${data.members_counter}`);
         $('.group_logo_img').attr('src', data.groupimage);
+        $('.bg_image').css('background', `linear-gradient(
+          rgba(0, 0, 0, 0.5),
+          rgba(0, 0, 0, 0.5)
+        ),
+    url("${data.groupimage}")`);
     })
     .catch((error) => console.log(error));
 
