@@ -85,9 +85,22 @@ body
 
 
 .left_pad{
+    color: white;
+    padding: 10px 20px;
     flex: 1;
-}
+    vertical-align:middle;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    text-align:center;
+    outline: none;
 
+
+    font-family: myriad-pro, sans-serif;
+    white-space: nowrap;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
+}
 
 .right_pad{
     flex: 1;

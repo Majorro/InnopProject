@@ -18,7 +18,7 @@ body
 {
     margin: 0;
     background-color: rgba(0, 0, 0, 0.8);
-    height: 100vh;
+    height: 100%;
 }
 
 .bg_image
@@ -86,7 +86,21 @@ body
 
 
 .left_pad{
+    color: white;
+    padding: 10px 20px;
     flex: 1;
+    vertical-align:middle;
+    background-color: rgba(0, 0, 0, 0);
+    cursor: pointer;
+    text-align:center;
+    outline: none;
+
+
+    font-family: myriad-pro, sans-serif;
+    white-space: nowrap;
+    font-style: normal;
+    font-weight: 100;
+    font-size: 20px;
 }
 
 
@@ -148,7 +162,6 @@ body
 {
     width: 16vw;
     background-color: rgba(0, 0, 0, 0.25);
-    height: 100%;
 }
 
 #group_info
@@ -394,12 +407,13 @@ body
 
 .recommendation_panel
 {
-    background-color: rgb(72, 66, 60);
+    background-color: rgb(72, 66, 60, 0.8);
     border-radius: 10px;
     padding: 0.5vh 1vw;
     margin: 0 2vw 2vw 0;
     height: 36vh;
     width: 23.7vw;
+
 }
 
 .recommendation_title
