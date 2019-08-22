@@ -225,61 +225,11 @@ def req_get_recomendation_group_id(group_id):
 
     if user is None:
         return error('User is not member this group')
-    print('user', user)
     result['status'] = 'Ok'
     result['message'] = ''
-    print(user['result_recommendation'])
     result['data'] = user['result_recommendation']
     return jsonify(result)
 
-
-#
-@app.route("/req/send_eval/<group_id>", methods=['POST'])
-def req_send_eval_group_id(group_id):
-    result = dict()
-    result['status'] = None
-    result['message'] = None
-
-    try:
-        group_id = int(group_id)
-    except:
-        return error('Wrong group_id')
-
-    if 'login' not in session:
-        return error('User is not authorized')
-
-    group = GroupsDB.get_by_id(group_id)
-
-    if group is None:
-        return error('Nonexistent group_id')
-
-
-
-    req = json.loads(request.data)
-
-    req['group_id'] = group_id
-    req['author_id'] = session['account_id']
-
-    params = ['appreciated_id', 'group_id', 'date', 'parameters', 'comment']
-
-#
-    for par in params:
-        if par not in req:
-            return error('Missing attribute - ' + par)
-
-    post_id = PostsDB.insert(req)
-    user = UsersDB.get_one_by_group_id_and_account_id(group_id, req['appreciated_id'])
-    print('POST = ', req)
-
-    user['posts'].append(post_id)
-
-    UsersDB.update_user(user)
-
-    result['status'] = 'Ok'
-    result['message'] = ''
-    return jsonify(result)
-
-###
 
 @app.route("/req/get_my_posts/<group_id>", methods=['GET'])
 def req_get_posts_id(group_id):
@@ -337,6 +287,53 @@ def req_update_recommendations(group_id, account_id):
     return jsonify(result)
 
 
+@app.route("/req/send_eval/<group_id>", methods=['POST'])
+def req_send_eval_group_id(group_id):
+    result = dict()
+    result['status'] = None
+    result['message'] = None
+
+    try:
+        group_id = int(group_id)
+    except:
+        return error('Wrong group_id')
+
+    if 'login' not in session:
+        return error('User is not authorized')
+
+    group = GroupsDB.get_by_id(group_id)
+
+    if group is None:
+        return error('Nonexistent group_id')
+
+
+
+    req = json.loads(request.data)
+
+    req['group_id'] = group_id
+    req['author_id'] = session['account_id']
+
+    params = ['appreciated_id', 'group_id', 'date', 'parameters', 'comment']
+
+#
+    for par in params:
+        if par not in req:
+            return error('Missing attribute - ' + par)
+
+    post_id = PostsDB.insert(req)
+    user = UsersDB.get_one_by_group_id_and_account_id(group_id, req['appreciated_id'])
+
+    user['posts'].append(post_id)
+
+    UsersDB.update_user(user)
+
+    req_update_recommendations(req['group_id'], req['appreciated_id'])
+
+    result['status'] = 'Ok'
+    result['message'] = ''
+    return jsonify(result)
+
+
 
 @app.route("/req/get_my_groups", methods=['GET'])
 def req_get_my_groups_get():
@@ -352,11 +349,13 @@ def req_get_my_groups_get():
 
 
     groups = []
-
+    print('ACCOUNT = ', account)
     for group_id in account['user_groups']:
         gr = dict()
         group = GroupsDB.get_by_id(group_id)
         user = UsersDB.get_one_by_group_id_and_account_id(group_id, session['account_id'])
+
+        print(user)
         gr['group_id'] = group_id
         gr['groupname'] = group['groupname']
         gr['groupimage'] = group['groupimage']
@@ -534,6 +533,9 @@ def req_get_group(group_id):
 
     if not flag:
         return redirect('/mygroups')
+
+    req_update_recommendations(group_id, session['account_id'])
+
     return render_template('group_page.html')
 
 #

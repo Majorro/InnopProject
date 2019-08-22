@@ -46,8 +46,8 @@ def add_account_to_group(account_id, group_id):
     user = dict()
     user['account_id'] = account_id
     user['group_id'] = group_id
-    user['result_data'] = dict()
-    user['result_recommendation'] = dict()
+    user['result_data'] = []
+    user['result_recommendation'] = []
     user['posts'] = []
 
     id_user = UsersDB.insert(user)
