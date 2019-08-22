@@ -82,8 +82,8 @@ class UserModel:
             user['group_id'],
             json.dumps(user['result_recommendation']),
             json.dumps(user['result_data']),
-            json.dumps(user['posts']),
-            (user['user_id'],)))
+            json.dumps(user['posts'])),
+            (user['user_id'],))
 
         cursor.close()
         self.connection.commit()
