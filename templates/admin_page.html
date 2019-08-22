@@ -3,10 +3,11 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Главная</title>
-        <link href="../static/styles/adminpage.css" rel="stylesheet">
+        <title>Администрирование</title>
+        <link href="../static/styles/admin_page.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 		<script src="https://kit.fontawesome.com/6a4be30845.js"></script>
 
@@ -16,6 +17,19 @@
     </head>
 
     <body>
+		<!-- new_group_form -->
+		<form id="new_group_form">
+			<h1>Создать новую группу</h1>
+			<div id="new_group_inputs">
+				<p id="group_name_title">Название группы</p>
+				<input type="text" id="group_name_form" name="groupName">
+				<p id="group_image_title">Аватар группы</p>
+				<input type="file" id="group_image_form" accept="image/*" name="groupAvatar">
+				<button type="submit" id="new_group_saver">Создать</button> <!-- problems with position -->
+			</div>
+		</form>
+		<!-- new_group_from end -->
+
         <!-- background_image -->
         <div class="bg_image"></div>
         <!-- background_image end -->
@@ -236,6 +250,6 @@
 
 
         <!-- end -->
-        <script src="../static/scripts/main.js" ></script>
+        <script src="../static/scripts/admin_page.js" ></script>
     </body>
 </html>
