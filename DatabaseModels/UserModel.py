@@ -4,7 +4,7 @@ def userdata_to_json(row):
     if row is None:
         return None
 
-    user_id, account_id, group_id, result_data,  result_recommendation, posts = row
+    user_id, account_id, group_id, result_recommendation, result_data, posts = row
 
     user = dict()
     user['user_id'] = user_id
@@ -60,7 +60,7 @@ class UserModel:
 
     def get_by_id(self, user_id):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM users WHERE id_user = ?", (str(user_id),))
+        cursor.execute("SELECT * FROM users WHERE user_id = ?", (str(user_id),))
         rows = cursor.fetchone()
         if not rows:
             return None
